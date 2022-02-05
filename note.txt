@@ -1,0 +1,26 @@
+Get family's members location through mobile phone - mobile app 
+
+App name: Location Care
+
+- Flow 
++ Parent mobile 
+  + Enter children mobile phone 
+    + On children mobile, display a request to allow parent 
+    to get their location 
+
+ 
+
++ Children mobile 
+  + Enter parent mobile phone 
+    + On parent mobile, display a request to allow children
+    to get their location 
+  
+Technical stack
++ React Native 
++ Database: 
++ Try to deploy to google market
+
+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
+
+git clone https://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@github.com/tcvduc/location-care.git
+
