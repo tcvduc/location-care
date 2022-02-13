@@ -24,3 +24,50 @@ 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
 
 git clone https://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@github.com/tcvduc/location-care.git
 
+
+
+
+
+
++ User Experience
+  + What will happens if the app don't have the password field
+  and only have phone input field? 
+    - Cons 
+    + User may see weird
+    + App is not safety (1)
+      + If any user got the phone number of any user 
+      then they can access to the data 
+        + What if user A got user B data 
+          + They can got those information:
+            + B children names
+            + B children phone number 
+            + B children location 
+          + If user B is a sapien who has low consciousness then what 
+          might happens?   
+            + 
+            + 
+            + 
+
+
+          + If user B is a sapien who has high consciousness then what 
+          might happens?       
+            + 
+            + 
+
+
+
+
+    - Pros 
+    + Don't have to remember password
+    + Short time to logged in 
+    + User Interface more simplify  
+
+    -> If somehow we can fix the (1) problem then
+    we can remove the password field 
+      + How to loggin only use phone number field but
+      the app still safe? 
+
+
+
++ User Interface
+     
