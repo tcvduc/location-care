@@ -37,16 +37,49 @@ git clone https://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@github.com/tcvduc/loc
     + App is not safety (1)
       + If any user got the phone number of any user 
       then they can access to the data 
-        + What if user A got user B data 
-          + They can got those information:
+        + What if user A got user B data, A and B doesn't have family relationship
+          + A can got those information:
             + B children names
             + B children phone number 
             + B children location 
           + If user B is a sapien who has low consciousness then what 
-          might happens?   
-            + 
-            + 
-            + 
+          might happens?  
+            - Stuff might happens to user A 
+              + If user A have good intention scenarios
+                + Scenario 1
+                  + B is A'friend
+                  + B and A in a place where they drink ancohol
+                  + B got drunk 
+                  + A still awake
+                  + A want to communicate B's family to let 
+                  them know B status
+                  -> A got B phone then A can do it by using 
+                  this app, what a beauty scenario!
+                + Scenario 2
+                  + A is a company
+                  + 
+                  + 
+
+
+                  -> User B will not be damaged
+              + If user A have bad intention scenarios: 
+                + Scenario 1
+                  + Relative to political scenario 
+                + Scenario 2
+                  + Relative to company scenario                
+                + Scenario 3 
+                  + Relative to friendship scenario                
+                                  
+                  -> User B will be damaged 
+
+            - Stuff might happens to user B
+              + If user B care about the leakage information 
+                + user B will be damaged 
+              + If user B is not care about the leakage information
+                + user B will not be damaged 
+   
+      
+             
 
 
           + If user B is a sapien who has high consciousness then what 
@@ -54,7 +87,7 @@ git clone https://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@github.com/tcvduc/loc
             + 
             + 
 
-
+        + What if user A got user B data, A and B have family relationship
 
 
     - Pros 
