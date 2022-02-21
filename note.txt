@@ -159,11 +159,15 @@ git clone https://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@github.com/tcvduc/loc
     to see what happens 
 
 + User Interface
-  + Logo 
-  + Name 
-  + Phone Number Input Field 
-  + Sign in button 
-  + Privacy, policy
+ + sign in screen
+    + Logo 
+    + Name 
+    + Phone Number Input Field 
+    + Sign in button 
+    
+ + dashboard screen 
+
+ + refer another app screen 
 
 
 

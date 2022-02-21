@@ -1,4 +1,11 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import SignIn from "../SignIn/SignIn";
 import icon from "../../assets/icon.png";
@@ -13,6 +20,7 @@ export default function Home(props: any) {
   const { navigation } = props;
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleSignInButtonOnPress = () => {
     setIsOpenSignIn(!isOpenSignIn);
@@ -31,8 +39,10 @@ export default function Home(props: any) {
 
   return (
     <View style={styles.container}>
-      <Image source={icon} style={styles.logo} />
+      {/* <Image source={icon} style={styles.logo} /> */}
       <Text style={styles.appName}>Location Care</Text>
+
+      <TextInput value="" />
 
       <View style={styles.groupButton}>
         <TouchableOpacity
@@ -40,12 +50,6 @@ export default function Home(props: any) {
           onPress={handleSignInButtonOnPress}
         >
           <Text style={styles.signInText}>Sign in</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.signUpButton}
-          onPress={handleSignUpButtonOnPress}
-        >
-          <Text style={styles.signUpText}>Sign up</Text>
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />

@@ -1,28 +1,19 @@
-import Home from "./components/Home/home";
-
+import SignInScreen from "./components/SignInScreen/SignInScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignIn from "./components/SignIn/SignIn";
-import SignUp from "./components/SignUp/SignUp";
 
 const stackNavigators = [
   {
     name: "home",
-    component: Home,
+    component: SignInScreen,
     options: {
       // title: "Welcome!",
     },
   },
-
   {
     name: "signIn",
     component: SignIn,
-    options: {},
-  },
-
-  {
-    name: "Sign Up",
-    component: SignUp,
     options: {},
   },
 ];
@@ -43,5 +34,5 @@ const StackNavigator = () => {
 
 export default function App() {
   // return <StackNavigator />;
-  return <Home />;
+  return <SignInScreen />;
 }
