@@ -3,18 +3,28 @@ Get family's members location through mobile phone - mobile app
 App name: Location Care
 
 - Flow 
-+ Parent mobile 
-  + Enter children mobile phone 
+
++ Flow version 1
+  + Parent mobile 
+    + Enter children mobile phone 
     + On children mobile, display a request to allow parent 
     to get their location 
 
- 
-
-+ Children mobile 
-  + Enter parent mobile phone 
+  + Children mobile 
+    + Enter parent mobile phone 
     + On parent mobile, display a request to allow children
     to get their location 
-  
+
++ Flow version 2
+  + Sapien A mobile 
+    + Enter person's phone number who you want to look their 
+    location: 
+    + On sapien B mobile, display a request to allow sapien A 
+    to get their location
+    
+
+ 
+
 Technical stack
 + React Native 
 + Database: 
@@ -35,72 +45,133 @@ git clone https://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@github.com/tcvduc/loc
     - Cons 
     + User may see weird
     + App is not safety (1)
-      + If any user got the phone number of any user 
+      + If any user got the phone number of another user 
       then they can access to the data 
-        + What if user A got user B data, A and B doesn't have family relationship
+        + What if user A got user B data
           + A can got those information:
-            + B children names
-            + B children phone number 
-            + B children location 
-          + If user B is a sapien who has low consciousness then what 
-          might happens?  
-            - Stuff might happens to user A 
-              + If user A have good intention scenarios
-                + Scenario 1
-                  + B is A'friend
-                  + B and A in a place where they drink ancohol
-                  + B got drunk 
-                  + A still awake
-                  + A want to communicate B's family to let 
-                  them know B status
-                  -> A got B phone then A can do it by using 
-                  this app, what a beauty scenario!
-                + Scenario 2
-                  + A is a company
-                  + 
-                  + 
+            + B's phone number, name, address   
+            + B's location look list  
+                + Scenario 1: related to friendship
+                  + Scenario 1.1: good intention
+                    + B is A's friend
+                    + B and A in a place where they drink ancohol
+                    + B got drunk 
+                    + A still awake
+                    + A want to communicate B's family to let 
+                    them know B status
+                    -> A got B phone then A can do it by using 
+                    this app, what a beauty scenario!
 
+                    -> B will not be damaged
 
-                  -> User B will not be damaged
-              + If user A have bad intention scenarios: 
-                + Scenario 1
-                  + Relative to political scenario 
-                + Scenario 2
-                  + Relative to company scenario                
-                + Scenario 3 
-                  + Relative to friendship scenario                
-                                  
-                  -> User B will be damaged 
+                  + Scenario 1.2: bad intention
+                    + A want to kill B 
+                    + This is a helper tool for this purpose
+                    -> B will be dead or live a life with full of worries
+                    + But the truth is if A really want to kill B 
+                    A will find a way to do this if this tool is not exist
+                    for example: buy data from Google, buy data from Facebook,
+                    buy data from the trademark devices that B use like 
+                    phone, television, washing machine, refrigerator, light bubls,
+                    wires even home structure system. 
+                    -> So this is not a reason to stop the remove password field
+                                
+                  + Scenario 1.3: neither good nor bad intention
+                    + Because of the curious A just want to know B 
+                    app data 
+                    -> B will not be damaged
+       
+                + Scenario 2: related to employer and employee relationship
+                  + Scenario 2.1: good intention
+                    + A is a company/employer B are employees
+                    + A want to know where B is, or just because
+                    A want to taste the feeling when we
+                    look somebody location through an application
+                    -> B will not be damaged
 
-            - Stuff might happens to user B
-              + If user B care about the leakage information 
-                + user B will be damaged 
-              + If user B is not care about the leakage information
-                + user B will not be damaged 
-   
-      
-             
+                  + Scenario 2.2: bad intention
+                    + A want to control B life
+                    -> B will be damaged
 
+                  + Scenario 2.3: good intention
+                    + B is a employee who also have A employer location 
+                    + B want to thank A for the good thing A did 
+                    -> A,B will not be damaged  
 
-          + If user B is a sapien who has high consciousness then what 
-          might happens?       
-            + 
-            + 
+                  + Scenario 2.4: bad intention
+                    + B is a employee who also have A employer location 
+                    + B want to harm A for the bad thing A did 
+                    -> A,B will be damaged  
+                     
+                  -> This app is risky, those sapiens from this 
+                  relationship to higher consciousness 
+                  sapiens relationship may not use  
 
-        + What if user A got user B data, A and B have family relationship
+                + Scenario 3: Related to company and company relationship 
+                  + A and B can watch each other location    
+                  -> There is nothing hurt happen if A and B don't 
+                  have bad intension 
+           
 
+                + Scenario 4: Related to country and country relationship 
+                  + They will not use 
 
+                + Scenario 5: Related to self-self relationship 
+                + scenario 5.1: B is a person who will feel 
+                  uncomfortable when B's location was known by other
+                    -> B will not use this app 
+
+                    + Why B worries about their location? 
+                    - Because B can die any second if someone 
+                    want to kill B                    
+  
     - Pros 
     + Don't have to remember password
     + Short time to logged in 
     + User Interface more simplify  
+    + Don't have password field <=> don't have register feature 
+    - mental heath pros: 
+    + Making our worry neuron cell become not worry neuron cell
+    + Once we have not worry about things, we can do the things 
+    we want. 
+    + Was we do the thing we want make us happy?
+    + We will not face the regret feeling 
+    + Once our strong mental neuron connected, no body can 
+    control us, we control ourself, our life 
+
+    + The thing is we want to know where our children been   
+    and don't have to remember the password because we 
+    have a lot of things to do to make this 
+    world becomes heaven = )), we don't have time to 
+    think a way to harm other for what.  
+   
 
     -> If somehow we can fix the (1) problem then
     we can remove the password field 
       + How to loggin only use phone number field but
       the app still safe? 
 
+    -> Although we have a lot of negative things but 
+    let's try to see what happens  
 
+    -> Although we see that we have a really lot of 
+    negative things but let's try to do something 
+    to see what happens 
 
 + User Interface
+  + Logo 
+  + Name 
+  + Phone Number Input Field 
+  + Sign in button 
+  + Privacy, policy
+
+
+
+
+
+
      
+
+
+
+
