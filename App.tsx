@@ -1,7 +1,6 @@
 import SignInScreen from "./components/SignInScreen/SignInScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignIn from "./components/SignIn/SignIn";
 
 const stackNavigators = [
   {
@@ -10,11 +9,6 @@ const stackNavigators = [
     options: {
       // title: "Welcome!",
     },
-  },
-  {
-    name: "signIn",
-    component: SignIn,
-    options: {},
   },
 ];
 

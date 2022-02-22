@@ -39,8 +39,8 @@ git clone https://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@github.com/tcvduc/loc
 
 
 
-+ User Experience
-  + What will happens if the app don't have the password field
+I. User Experience
+  1. What will happens if the app don't have the password field
   and only have phone input field? 
     - Cons 
     + User may see weird
@@ -158,7 +158,43 @@ git clone https://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@github.com/tcvduc/loc
     negative things but let's try to do something 
     to see what happens 
 
-+ User Interface
+
+  2. Common hand manipulation 
+  2.1. Mobile Phone  
+                         Phone 
+                         -----
+                         |   |
+ Comfortable position ___|___|___ Comfortable position 
+                         | o |    Touch the input field at first time
+                         -----    when user put their finger on the phone 
+
+
+  2.2. Ipad 
+  2.2.1. Vertical position 
+      -------
+      |     |
+      |     |
+      |_   _|___ comfortable position 
+      || o ||
+      -------
+
+  2.2.2. Horizontal position 
+                              ----------
+                              |        |
+    comfortable position    __|[]    []|__ comfortable position  
+                              ----------
+
+                         ----------
+                         |   []___|___ display touch content right there 
+    touch right there  __|[]    []|__ touch right there 
+                         ----------
+   
+
+
+
+
+
+II. User Interface
  + sign in screen
     + Logo 
     + Name 

@@ -5,13 +5,17 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import SignIn from "../SignIn/SignIn";
-import icon from "../../assets/icon.png";
+import logo from "../../assets/images/logo-ver2.png";
 import { appColors } from "../../config/app.color";
-import { useState } from "react";
-import SignUp from "../SignUp/SignUp";
+import React, { useState } from "react";
+
+import PhoneDialCodeShortDescription from "../PhoneDialCode/PhoneDialCodeShortDescription";
+import PhoneDialCodeFullDescription from "../PhoneDialCode/PhoneDialCodeFullDescription";
+import PhoneDialCode from "../PhoneDialCode/PhoneDialCode";
 
 const commonBorderRadiusValue = 5;
 const commonButtonPaddingValue = 12;
@@ -20,58 +24,47 @@ export default function Home(props: any) {
   const { navigation } = props;
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
 
   const handleSignInButtonOnPress = () => {
     setIsOpenSignIn(!isOpenSignIn);
   };
-  const handleSignUpButtonOnPress = () => {
-    setIsOpenSignUp(!isOpenSignUp);
-  };
-
-  if (isOpenSignUp === true) {
-    return <SignUp />;
-  }
-
-  if (isOpenSignIn === true) {
-    return <SignIn />;
-  }
 
   return (
-    <View style={styles.container}>
-      {/* <Image source={icon} style={styles.logo} /> */}
-      <Text style={styles.appName}>Location Care</Text>
+    <View style={[styles.membrane, styles.layouting]}>
+      <Image source={logo} style={styles.logo} />
 
-      <TextInput value="" />
+      <Text style={styles.appName}>LOCATION CARE</Text>
 
-      <View style={styles.groupButton}>
-        <TouchableOpacity
-          style={styles.signInButton}
-          onPress={handleSignInButtonOnPress}
-        >
-          <Text style={styles.signInText}>Sign in</Text>
-        </TouchableOpacity>
-      </View>
-      <StatusBar style="auto" />
+      <PhoneDialCode />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  membrane: {
     backgroundColor: appColors.secondary,
-    justifyContent: "center",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
+    // justifyContent: "center",
+    paddingTop: "30%",
+  },
+  layouting: {
+    borderWidth: 5,
+    borderStyle: "solid",
+    borderColor: "#111",
   },
   appName: {
     color: appColors.primary,
     fontFamily: "sans-serif",
-    fontWeight: "500",
-    fontSize: 36,
+    fontWeight: "600",
+    marginTop: 12,
+    marginBottom: 24,
+    fontSize: 32,
   },
   logo: {
-    marginTop: 80,
+    marginTop: 120,
     height: 80,
     width: 100,
     marginBottom: 24,
@@ -81,34 +74,15 @@ const styles = StyleSheet.create({
     padding: commonButtonPaddingValue,
     borderRadius: commonBorderRadiusValue,
     backgroundColor: appColors.primary,
-
-    //
     borderWidth: 2,
     borderStyle: "solid",
     borderColor: "#fff",
+    width: 200,
   },
   signInText: {
     color: appColors.secondary,
   },
-  signUpButton: {
-    marginLeft: 6,
-    padding: commonButtonPaddingValue,
-    borderRadius: commonBorderRadiusValue,
-    backgroundColor: appColors.primary,
-    color: appColors.secondary,
-    //
-    borderWidth: 2,
-    borderStyle: "solid",
-    borderColor: "#fff",
-  },
   signUpText: {
     color: appColors.secondary,
-  },
-  groupButton: {
-    marginTop: 100,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    width: 200,
   },
 });
