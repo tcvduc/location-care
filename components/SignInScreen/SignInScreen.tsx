@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import logo from "../../assets/images/logo-ver2.png";
-import { appColors } from "../../config/app.color";
+import { appColors, centerForAlignItems } from "../../config/global.variables";
 import React, { useState } from "react";
 
 import PhoneDialCodeShortDescription from "../PhoneDialCode/PhoneDialCodeShortDescription";
@@ -33,7 +33,7 @@ export default function Home(props: any) {
     <View style={[styles.membrane, styles.layouting]}>
       <Image source={logo} style={styles.logo} />
 
-      <Text style={styles.appName}>LOCATION CARE</Text>
+      <Text style={styles.appName}>location care</Text>
 
       <PhoneDialCode />
     </View>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     // justifyContent: "center",
-    paddingTop: "30%",
+    paddingTop: "16%",
   },
   layouting: {
     borderWidth: 5,
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     color: appColors.primary,
     fontFamily: "sans-serif",
     fontWeight: "600",
-    marginTop: 12,
-    marginBottom: 24,
+    // marginTop: 12,
+    marginBottom: 28,
     fontSize: 32,
   },
   logo: {
@@ -68,21 +68,5 @@ const styles = StyleSheet.create({
     height: 80,
     width: 100,
     marginBottom: 24,
-  },
-  signInButton: {
-    marginRight: 6,
-    padding: commonButtonPaddingValue,
-    borderRadius: commonBorderRadiusValue,
-    backgroundColor: appColors.primary,
-    borderWidth: 2,
-    borderStyle: "solid",
-    borderColor: "#fff",
-    width: 200,
-  },
-  signInText: {
-    color: appColors.secondary,
-  },
-  signUpText: {
-    color: appColors.secondary,
   },
 });

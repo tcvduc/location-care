@@ -207,6 +207,35 @@ II. User Interface
 
 
 
+III. Tech 
+1. Declare number/string/any-type value
++ Open app 
++ Variables use memory to live 
++ If variable have the same value then we should 
+point it to the same place to save resources   
+
+2. Import problem
+2.1
++ On module A, import module B 
++ On module B, import module A 
+-> Create infinity cycle import 
+
+2.2
++ On module C, import module A, B  
++ On module C, export module A, B  
+
++ On module A/B, import module C 
+-> Create infinity cycle import
+
+
+
+ 
+
+
+
+IV. Todo
++ Replace all variables those have the same value by global variable 
++ App name font famlily
 
 
 

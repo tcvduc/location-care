@@ -1,6 +1,15 @@
 import React from "react";
 import { Text, View, StyleSheet, GestureResponderEvent } from "react-native";
 import PhoneDialCodeFullDescription from "./PhoneDialCodeFullDescription";
+import {
+  appColors,
+  commonBorderRadiusValue,
+  centerForAlignItems,
+  numbers,
+  flexForDisplay,
+} from "../../config/global.variables";
+import { phoneDialCodeShortDescriptionWidth } from "./PhoneDialCodeVariables";
+
 const data = [
   {
     countryName: "a",
@@ -37,7 +46,7 @@ function PhoneDialCodeShortDescription(): JSX.Element {
     <View>
       <View style={styles.membrane} onTouchStart={handleOnTouchStart}>
         <Text>{data[0].countryFlag}</Text>
-        <Text>(+{data[0].countryCode})</Text>
+        <View style={styles.triangle} />
       </View>
       <View>
         {isDisplayPhoneDialCodeFullDescription === true ? (
@@ -53,10 +62,34 @@ function PhoneDialCodeShortDescription(): JSX.Element {
 const styles = StyleSheet.create({
   membrane: {
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: appColors.tertiary,
+    borderRadius: commonBorderRadiusValue,
+    borderTopRightRadius: numbers.zero,
+    borderBottomRightRadius: numbers.zero,
     borderStyle: "solid",
     position: "relative",
-    width: 80,
+    zIndex: 5,
+    width: phoneDialCodeShortDescriptionWidth,
+    height: 40,
+    backgroundColor: appColors.tertiary,
+    display: flexForDisplay,
+    flexDirection: "row",
+    alignItems: centerForAlignItems,
+    justifyContent: "center",
+  },
+  triangle: {
+    borderWidth: 6,
+    borderLeftWidth: numbers.three,
+    borderRightWidth: numbers.three,
+    position: "relative",
+    top: 4,
+    left: numbers.three,
+
+    borderLeftColor: appColors.transparent,
+    borderRightColor: appColors.transparent,
+    borderBottomColor: appColors.transparent,
+
+    backgroundColor: appColors.transparent,
   },
 });
 
