@@ -30,7 +30,7 @@ export default function Home(props: any) {
   };
 
   return (
-    <View style={[styles.membrane, styles.layouting]}>
+    <View style={styles.membrane}>
       <Image source={logo} style={styles.logo} />
 
       <Text style={styles.appName}>location care</Text>

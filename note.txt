@@ -238,9 +238,60 @@ IV. Todo
 + App name font famlily
 
 
+V. Tech note
 
-     
+1. Typescript 
+- *.d.ts file versus *.ts file versus *.tsx file
+
++ *.d.ts 
+  + Typescript declaration file 
+  + Typescript compiler scope 
+  + This file let Typescript compiler know 
+  if stuff was existed 
+  + Example:
+    + We have 
+      function displayMessage(message) {
+         alert(message)
+      }
+      outside the typescript compiler scope 
+      -> Typescript compiler cannot read this 
+      -> So we use *.d.ts to declare that 
+    + Example
+      + on types.d.ts
+        + write 
+          + declare function displayMessage(message:string);
+
++ *.ts file = standard file extension, it 
+will be compiled to Javascript
+
++ *.tsx file 
+  + React Typescript File
+  + a *.ts file 
+  + written using JSX syntax 
+
+2. Typescript compiler 
+
+3. JSX 
++ JSX: Javascript XML 
++ JSX allow us to write HTML in React 
+- Example:
++ const element = <h1>I love JSX!</h1>
 
 
+4. XML 
++ XML: Extensible Marup Language 
++ XML is similar to HTML, but without predefined 
+tag to use  
++ In XML we define our own tags specifically 
+for our need
+- Example:
+<?xml version = "1.0" encoding="UTF-8"?>
+<message>
+ <warning>
+  Hello World 
+ </warning>
+</message> 
 
 
+VI. Glean 
++ ISO: International Organization for Standardization

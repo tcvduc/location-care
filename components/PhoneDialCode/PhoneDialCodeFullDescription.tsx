@@ -68,8 +68,8 @@ const PhoneDialCodeFullDescription2 = () => {
 const styles = StyleSheet.create({
   membrane: {
     position: "relative",
-    top: 0,
-    left: 0,
+    top: "-50%",
+    left: "-50%",
     zIndex: 10,
     borderStyle: "solid",
     borderColor: appColors.tertiary,
