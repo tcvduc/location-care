@@ -22,6 +22,7 @@ App name: Location Care
     + On sapien B mobile, display a request to allow sapien A 
     to get their location
     
+    
 
  
 
@@ -188,7 +189,20 @@ I. User Experience
                          |   []___|___ display touch content right there 
     touch right there  __|[]    []|__ touch right there 
                          ----------
+  3. Display Flag 
+  - Flow: 
+  + When user open the app, ask user to get the location 
+    + if user allow then display the flag corresponding the country 
+    + if user wasn't allow then what might happend ?
+      + if display the USA(+1) country 
+        + sleep sapiens will see nothing 
+        + awake sapiens in another country may feel something bad 
+      -> So what we gonna do?
+        + display blank rectangle? - temporary solution
+        + 
    
+  4. Display too much red color 
+
 
 
 
