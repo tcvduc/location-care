@@ -1,4 +1,5 @@
-Get family's members location through mobile phone - mobile app 
+Corpse 1: Get family's members location through mobile phone - mobile app 
+- Get the person who you care location throught mobile phone - mobile app 
 
 App name: Location Care
 
@@ -28,7 +29,12 @@ App name: Location Care
 
 Technical stack
 + React Native 
-+ Database: 
+  + Why React Native? 
+  -> Common mobile development tech 
++ Database: MySQL 
+  + Why MySQL? 
+  -> Common database development tech 
+
 + Try to deploy to google market
 
 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
@@ -159,6 +165,8 @@ I. User Experience
     negative things but let's try to do something 
     to see what happens 
 
+    -> It is too dangerous for user, you do this will harm them, stop 
+
 
   2. Common hand manipulation 
   2.1. Mobile Phone  
@@ -199,13 +207,20 @@ I. User Experience
         + awake sapiens in another country may feel something bad 
       -> So what we gonna do?
         + display blank rectangle? - temporary solution
-        + 
+        
    
   4. Display too much red color 
+  -> Don't display too much red color 
+  -> Display red color in stuff like: app name, logo  
 
+  5. App color 
+  - The color represent for Day work, night have fun, sync with solar system color
+    + Day color for Day 
+    + Night color for night   
 
-
-
+  + Black color damage our pupil
+    -> Decreasing the black opacity 
+    -> linear gradient color - use this
 
 
 II. User Interface
@@ -250,6 +265,7 @@ point it to the same place to save resources
 IV. Todo
 + Replace all variables those have the same value by global variable 
 + App name font famlily
++ onboard canvas
 
 
 V. Tech note
