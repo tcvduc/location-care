@@ -12,8 +12,6 @@ import { StatusBar } from "expo-status-bar";
 import logo from "../../assets/images/logo-ver2.png";
 import { appColors, centerForAlignItems } from "../../config/global.variables";
 import React, { useState } from "react";
-// import Canvas from "react-native-canvas";
-import Canvas from "../Canvas/Canvas";
 
 import PhoneDialCodeShortDescription from "../PhoneDialCode/PhoneDialCodeShortDescription";
 import PhoneDialCodeFullDescription from "../PhoneDialCode/PhoneDialCodeFullDescription";
@@ -21,10 +19,6 @@ import PhoneDialCode from "../PhoneDialCode/PhoneDialCode";
 
 const commonBorderRadiusValue = 5;
 const commonButtonPaddingValue = 12;
-
-type canvas = {
-  getContext: () => {};
-};
 
 export default function Home(props: any) {
   const { navigation } = props;
@@ -35,19 +29,13 @@ export default function Home(props: any) {
     setIsOpenSignIn(!isOpenSignIn);
   };
 
-  const handleCanvas = (canvas: any) => {
-    const c = canvas.getContext("2d");
-    const w = canvas.width;
-    const h = canvas.height;
-    c.moveTo(0, 0);
-    c.lineTo(w, h);
-    c.stroke();
-  };
-
   return (
     <View style={styles.membrane}>
-      <Canvas ref={handleCanvas} style={styles.canvas}></Canvas>
-      {/* <Canvas ref={handleCanvas} style={styles.canvas}></Canvas> */}
+      <Image source={logo} style={styles.logo} />
+
+      <Text style={styles.appName}>location care</Text>
+
+      <PhoneDialCode />
     </View>
   );
 }
@@ -61,13 +49,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
     paddingTop: "16%",
-  },
-  canvas: {
-    height: 100,
-    width: 200,
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "black",
   },
   layouting: {
     borderWidth: 5,

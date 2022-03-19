@@ -21,17 +21,17 @@ const stackNavigators = [
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {stackNavigators.map((element, index) => {
-          return <Stack.Screen {...element} key={index} />;
-        })}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+// const StackNavigator = () => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         {stackNavigators.map((element, index) => {
+//           return <Stack.Screen {...element} key={index} />;
+//         })}
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
 
 export default function App() {
   // return <StackNavigator />;
