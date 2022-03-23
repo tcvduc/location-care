@@ -46,6 +46,7 @@ export default function Home(props: any) {
 
   return (
     <View style={styles.membrane}>
+      <Text>dsadasd</Text>
       <Canvas ref={handleCanvas} style={styles.canvas}></Canvas>
       {/* <Canvas ref={handleCanvas} style={styles.canvas}></Canvas> */}
     </View>

@@ -6,5 +6,5 @@
   "packagerNgrokUrl": "https://r2-a2x.anonymous.location-care.exp.direct",
   "ngrokPid": 31036,
   "packagerPid": null,
-  "webpackServerPort": null
+  "webpackServerPort": 19006
 }

@@ -2,6 +2,7 @@ import SignInScreen from "./components/SignInScreen/SignInScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ScollView from "./components/ScollView/ScollView";
+import AuroraPasswordInput from "./components/AuroraPasswordInput/AuroraPasswordInput";
 const stackNavigators = [
   // {
   //   name: "home",
@@ -35,5 +36,6 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   // return <StackNavigator />;
-  return <SignInScreen />;
+  // return <SignInScreen />;
+  return <AuroraPasswordInput />;
 }

@@ -3887,6 +3887,11 @@
   dependencies:
     "object-visit" "^1.0.0"
 
+"matri@^1.0.4":
+  "integrity" "sha512-irrUHoCVqRhiiqajjg1U9BUjY4i93+SspydJZ8cz81nvv14PasE5D9TyYS6Ry26VTyRmPGsxQ8TwRwo4pF8U4w=="
+  "resolved" "https://registry.npmjs.org/matri/-/matri-1.0.4.tgz"
+  "version" "1.0.4"
+
 "md5-file@^3.2.3":
   "integrity" "sha512-3Tkp1piAHaworfcCgH0jKbTvj1jWWFgbvh2cXaNCgHwyTCBxxvD1Y04rmfpvdPm1P4oXMOpm6+2H7sr7v9v8Fw=="
   "resolved" "https://registry.npmjs.org/md5-file/-/md5-file-3.2.3.tgz"
