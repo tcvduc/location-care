@@ -1,7 +1,15 @@
-import { LegacyRef, useEffect, useState } from "react";
-import { View, StyleSheet, createElement, TextInput, Text } from "react-native";
+import React, { createRef, LegacyRef, useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  createElement,
+  TextInput,
+  Text,
+  GestureResponderEvent,
+} from "react-native";
 import { initArray } from "../../util/3.array.util";
 
+const auroraColor = "linear-gradient(to bottom, #88F29C, #34EFC3,#94FFDA)";
 const dotCSSInfo = {
   width: 10,
   height: 10,
@@ -22,8 +30,16 @@ const AuroraPasswordInputComponent = () => {
   const [countAuroraDot, setCountAuroraDot] = useState<Array<Number>>([]);
   const [onOffCaret, setOnOffCaret] = useState(false);
   const [isOnCaretHandler, setIsOnCaretHandler] = useState(false);
+  const [isTextInputOnFocus, setIsTextInputOnFocus] = useState(false);
+  const textInputRef: React.LegacyRef<TextInput> | undefined = createRef();
 
-  const handleTextInputChange = (event: any) => {
+  const handleTextInputOnFocus = (event: any) => {
+    console.log("is focus");
+
+    setIsTextInputOnFocus(isTextInputOnFocus);
+  };
+
+  const handleTextInputOnChange = (event: any) => {
     setInputValue(event.target.value);
     const arrayTemporary = initArray(event.target.value.length);
     setCountAuroraDot(arrayTemporary);
@@ -46,19 +62,36 @@ const AuroraPasswordInputComponent = () => {
     }, 1060);
   };
 
+  const handleDotsContainerOnTouchStart = (event: GestureResponderEvent) => {
+    event.stopPropagation();
+  };
+
   useEffect(() => {
     caretOnOffHandler();
   }, [isOnCaretHandler]);
 
   return (
     <View style={styles.membrane}>
+      {/* <ControllingTextInputRef /> */}
+
+      <View style={styles.virtual_text_input_top_border}></View>
       <TextInput
-        onChange={handleTextInputChange}
+        focusable={false}
+        onChange={handleTextInputOnChange}
+        onFocus={handleTextInputOnFocus}
         value={inputValue}
         style={styles.input_type_password}
       />
+      <View style={styles.virtual_text_input_left_border}></View>
 
-      <View style={styles.dots_container}>
+      <View style={styles.virtual_text_input_bottom_border}></View>
+
+      <View style={styles.virtual_text_input_right_border}></View>
+
+      <View
+        onTouchStart={handleDotsContainerOnTouchStart}
+        style={styles.dots_container}
+      >
         {countAuroraDot.map((e, index) => (
           <View key={index} style={styles.dot}></View>
         ))}
@@ -71,28 +104,58 @@ const AuroraPasswordInputComponent = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   membrane: {
     height: 20,
     width: 100,
-    borderWidth: 1,
-    borderColor: "#111",
-    borderStyle: "solid",
+    position: "relative",
+  },
+  virtual_text_input_top_border: {
+    width: inputTypePasswordCSSInfo.width,
+    height: 3,
+    backgroundColor: "#fff",
+    position: "absolute",
+    top: 0,
+  },
+  virtual_text_input_bottom_border: {
+    width: inputTypePasswordCSSInfo.width,
+    height: 3,
+    backgroundColor: "#fff",
+    position: "absolute",
+    bottom: -1,
+  },
+  virtual_text_input_left_border: {
+    width: 4,
+    height: inputTypePasswordCSSInfo.height,
+    backgroundColor: "#fff",
+    position: "absolute",
+    left: 0,
+  },
+
+  virtual_text_input_right_border: {
+    width: 4,
+    height: inputTypePasswordCSSInfo.height,
+    backgroundColor: "#fff",
+    position: "absolute",
+    right: -1,
   },
   input_type_password: {
+    shadowColor: "transparent",
+
     borderWidth: 1,
-    borderColor: "#111",
+    borderColor: "red",
     borderStyle: "solid",
     width: inputTypePasswordCSSInfo.width,
     height: inputTypePasswordCSSInfo.height,
-    position: "relative",
-    color: "#111",
+    // position: "relative",
+    paddingLeft: 12,
   },
+
   dot: {
     height: dotCSSInfo.height,
     width: dotCSSInfo.width,
-    backgroundImage: "linear-gradient(to right, #00FF2F, #34EFC3,#94FFDA)",
+    backgroundColor: auroraColor,
+    // backgroundImage: auroraColor,
     clipPath: "circle(30%);",
   },
   dots_container: {
@@ -103,8 +166,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 12,
     position: "absolute",
-    // top: 2,
-    top: 30,
+    top: 2,
+    // top: 30,
 
     left: 0,
     zIndex: 10,
@@ -112,7 +175,8 @@ const styles = StyleSheet.create({
   caret: {
     width: 0.4,
     height: 10,
-    backgroundImage: "linear-gradient(to right, #00FF2F, #34EFC3,#94FFDA)",
+    backgroundColor: auroraColor,
+    // backgroundImage: auroraColor,
   },
 });
 
