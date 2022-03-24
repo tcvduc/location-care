@@ -10,4 +10,12 @@ function generateArrayRandomString(length: number) {
   return ret;
 }
 
-export { generateArrayRandomString };
+function initArray(length: Number) {
+  const ret = new Array(length);
+  for (let i = ret.length - 1; i >= 0; --i) {
+    ret[i] = 0;
+  }
+  return ret;
+}
+
+export { generateArrayRandomString,initArray };
