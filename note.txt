@@ -322,6 +322,13 @@ for our need
  </warning>
 </message> 
 
+5. Android Studio tools 
++ https://docs.expo.dev/workflow/android-studio-emulator/ 
++ How to open Appearance & Behavior 
+  + More action -> SDK Manager -> SDK tools
++ Android SDK Location: C:\Users\LENOVO\AppData\Local\Android\Sdk
++ ADV: Android Virtual Device
+
 
 VI. Glean 
 + ISO: International Organization for Standardization

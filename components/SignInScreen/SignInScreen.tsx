@@ -1,23 +1,8 @@
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
-import logo from "../../assets/images/logo-ver2.png";
-import { appColors, centerForAlignItems } from "../../config/global.variables";
-import React, { useState } from "react";
-// import Canvas from "react-native-canvas";
-import Canvas from "../Canvas/Canvas";
-
-import PhoneDialCodeShortDescription from "../PhoneDialCode/PhoneDialCodeShortDescription";
-import PhoneDialCodeFullDescription from "../PhoneDialCode/PhoneDialCodeFullDescription";
-import PhoneDialCode from "../PhoneDialCode/PhoneDialCode";
+import { useState } from "react";
+import { StyleSheet, Text, View, Image, TextInput } from "react-native";
+import dayIcon from "../../assets/images/logo-ver3.png";
+import { appColors } from "../../config/global.variables";
+import PhoneInput from "react-native-phone-input";
 
 const commonBorderRadiusValue = 5;
 const commonButtonPaddingValue = 12;
@@ -46,9 +31,18 @@ export default function Home(props: any) {
 
   return (
     <View style={styles.membrane}>
-      <Text>dsadasd</Text>
-      <Canvas ref={handleCanvas} style={styles.canvas}></Canvas>
-      {/* <Canvas ref={handleCanvas} style={styles.canvas}></Canvas> */}
+      <View style={styles.dayIconContainer}>
+        <Image style={styles.dayIcon} source={dayIcon} />
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.appName}>Location Care</Text>
+      </View>
+      <View style={styles.section}>
+        <PhoneInput style={styles.phoneInput} />
+      </View>
+      <View style={styles.section}>
+        <TextInput style={styles.passwordField} textContentType="password" />
+      </View>
     </View>
   );
 }
@@ -63,13 +57,41 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     paddingTop: "16%",
   },
-  canvas: {
-    height: 100,
-    width: 200,
+  passwordField: {
+    width: "70%",
+    height: 30,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: "transparent",
+    borderStyle: "solid",
+    borderBottomColor: "#111",
+  },
+  phoneInput: {
+    width: "70%",
+    height: 30,
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "transparent",
+    borderBottomColor: "#111",
   },
+  section: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "70%",
+    // borderWidth: 5,
+    // borderStyle: "solid",
+    // borderColor: "#111",
+  },
+  dayIconContainer: {
+    width: 60,
+    height: 80,
+  },
+  dayIcon: {
+    width: "auto",
+    height: "100%",
+  },
+
   layouting: {
     borderWidth: 5,
     borderStyle: "solid",

@@ -35,7 +35,5 @@ const Stack = createNativeStackNavigator();
 // };
 
 export default function App() {
-  // return <StackNavigator />;
-  // return <SignInScreen />;
-  return <AuroraPasswordInput />;
+  return <SignInScreen />;
 }

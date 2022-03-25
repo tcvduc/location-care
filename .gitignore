@@ -27,6 +27,7 @@ coverage
 
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
+.expo
 
 # Bower dependency directory (https://bower.io/)
 bower_components
@@ -58,6 +59,7 @@ typings/
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
+.expo/
 
 # Optional REPL history
 .node_repl_history

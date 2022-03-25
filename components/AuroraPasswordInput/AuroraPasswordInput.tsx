@@ -72,8 +72,7 @@ const AuroraPasswordInputComponent = () => {
 
   return (
     <View style={styles.membrane}>
-      {/* <ControllingTextInputRef /> */}
-
+      <Text>dasdas</Text>
       <View style={styles.virtual_text_input_top_border}></View>
       <TextInput
         focusable={false}
@@ -154,9 +153,7 @@ const styles = StyleSheet.create({
   dot: {
     height: dotCSSInfo.height,
     width: dotCSSInfo.width,
-    backgroundColor: auroraColor,
-    // backgroundImage: auroraColor,
-    clipPath: "circle(30%);",
+    backgroundColor: "red",
   },
   dots_container: {
     borderRadius: 2,
@@ -175,8 +172,6 @@ const styles = StyleSheet.create({
   caret: {
     width: 0.4,
     height: 10,
-    backgroundColor: auroraColor,
-    // backgroundImage: auroraColor,
   },
 });
 
