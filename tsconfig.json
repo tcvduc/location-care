@@ -8,6 +8,13 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "allowJs": true
+    "allowJs": true,
+    // config for backend
+    "forceConsistentCasingInFileNames": true,
+    "module": "CommonJS",
+    "esModuleInterop": true
+    // "outDir": "./build",
+    // "rootDir": ""
+    // "skipLibCheck": false
   }
 }

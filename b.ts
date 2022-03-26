@@ -1,2 +1,3 @@
-const a:Number=1
-console.log(a);
+import {generateRandomString} from './util/1.string.util';
+
+console.log(generateRandomString(30));

@@ -332,12 +332,31 @@ for our need
 + ADV: Android Virtual Device
 
 6. Figma tools 
-- How to open web console 
+6.1. How to open web console 
   + right click -> development -> open console
 
-- Integrate Figma Plugin With VS Code 
+6.2. Integrate Figma Plugin With VS Code 
   + ctrl + shift + B -> select tsc: watch - tsconfig.json.
 
+6.3. Quick Open Plugin 
+  + ctrl + / -> plugin name
+
+
+7. MySQL 
+7.1. MySQL Server Information  
++ user: root
++ password: tramylemy
+
+7.2. Understand varchar(n) size
++ varchar(5) <=> "12345"
++ varchar(255) <=> a string which have 255 characters
+
+7.3. Practise design 
++ stuff_name varchar(size = ?)
+  + Common stuff need to do string length is about 20 - 40, 
+  so size = 80 is okay
+
+  
 
 
 VI. Glean 
