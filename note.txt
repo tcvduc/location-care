@@ -300,6 +300,8 @@ will be compiled to Javascript
   + written using JSX syntax 
 
 2. Typescript compiler 
+- parse *.ts file to *.js file
+  + npx tsc file.ts 
 
 3. JSX 
 + JSX: Javascript XML 

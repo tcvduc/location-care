@@ -1,0 +1,11 @@
+{
+  "name": "stuff-need-to-do",
+  "id": "1089434474887625366",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": [
+    "figma",
+    "figjam"
+  ],
+  "ui": "ui.html"
+}
