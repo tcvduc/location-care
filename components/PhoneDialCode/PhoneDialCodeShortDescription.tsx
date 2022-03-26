@@ -1,13 +1,13 @@
 import React from "react";
-import { Text, View, StyleSheet, GestureResponderEvent } from "react-native";
-import PhoneDialCodeFullDescription from "./PhoneDialCodeFullDescription";
+import { StyleSheet, Text, View } from "react-native";
 import {
   appColors,
-  commonBorderRadiusValue,
   centerForAlignItems,
-  numbers,
+  commonBorderRadiusValue,
   flexForDisplay,
+  numbers,
 } from "../../config/global.variables";
+import PhoneDialCodeFullDescription from "./PhoneDialCodeFullDescription";
 import { phoneDialCodeShortDescriptionWidth } from "./PhoneDialCodeVariables";
 
 const data = [
@@ -36,7 +36,7 @@ function PhoneDialCodeShortDescription(): JSX.Element {
     setIsDisplayPhoneDialCodeFullDescription,
   ] = React.useState(false);
 
-  const handleOnTouchStart = function (event: GestureResponderEvent) {
+  const handleOnTouchStart = function () {
     setIsDisplayPhoneDialCodeFullDescription(
       !isDisplayPhoneDialCodeFullDescription
     );

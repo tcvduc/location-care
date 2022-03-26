@@ -130,7 +130,7 @@ function sortArrayObject(a:object[], objectKey:string, orderType:string) {
 }
 
 {
-  const a = [1, 3, 5, 2, 4, 9, 6, 7, 8];
+  // const a = [1, 3, 5, 2, 4, 9, 6, 7, 8];
 
 }
 

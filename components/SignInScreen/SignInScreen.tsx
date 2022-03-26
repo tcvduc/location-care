@@ -1,34 +1,12 @@
-import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 import dayIcon from "../../assets/images/logo-ver3.png";
 import { appColors } from "../../config/global.variables";
 import PhoneInput from "react-native-phone-input";
 
-const commonBorderRadiusValue = 5;
-const commonButtonPaddingValue = 12;
+// const commonBorderRadiusValue = 5;
+// const commonButtonPaddingValue = 12;
 
-type canvas = {
-  getContext: () => {};
-};
-
-export default function Home(props: any) {
-  const { navigation } = props;
-  const [isOpenSignUp, setIsOpenSignUp] = useState(false);
-  const [isOpenSignIn, setIsOpenSignIn] = useState(false);
-
-  const handleSignInButtonOnPress = () => {
-    setIsOpenSignIn(!isOpenSignIn);
-  };
-
-  const handleCanvas = (canvas: any) => {
-    const c = canvas.getContext("2d");
-    const w = canvas.width;
-    const h = canvas.height;
-    c.moveTo(0, 0);
-    c.lineTo(w, h);
-    c.stroke();
-  };
-
+export default function Home() {
   return (
     <View style={styles.membrane}>
       <View style={styles.dayIconContainer}>

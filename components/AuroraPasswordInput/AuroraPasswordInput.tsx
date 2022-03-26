@@ -1,15 +1,14 @@
-import React, { createRef, LegacyRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  View,
-  StyleSheet,
-  createElement,
-  TextInput,
-  Text,
   GestureResponderEvent,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { initArray } from "../../util/3.array.util";
 
-const auroraColor = "linear-gradient(to bottom, #88F29C, #34EFC3,#94FFDA)";
+// const auroraColor = "linear-gradient(to bottom, #88F29C, #34EFC3,#94FFDA)";
 const dotCSSInfo = {
   width: 10,
   height: 10,
@@ -31,9 +30,8 @@ const AuroraPasswordInputComponent = () => {
   const [onOffCaret, setOnOffCaret] = useState(false);
   const [isOnCaretHandler, setIsOnCaretHandler] = useState(false);
   const [isTextInputOnFocus, setIsTextInputOnFocus] = useState(false);
-  const textInputRef: React.LegacyRef<TextInput> | undefined = createRef();
 
-  const handleTextInputOnFocus = (event: any) => {
+  const handleTextInputOnFocus = () => {
     console.log("is focus");
 
     setIsTextInputOnFocus(isTextInputOnFocus);
@@ -91,8 +89,8 @@ const AuroraPasswordInputComponent = () => {
         onTouchStart={handleDotsContainerOnTouchStart}
         style={styles.dots_container}
       >
-        {countAuroraDot.map((e, index) => (
-          <View key={index} style={styles.dot}></View>
+        {countAuroraDot.map((element, key) => (
+          <View key={key} style={styles.dot} data-dot={element}></View>
         ))}
         {onOffCaret === true ? (
           <View style={styles.caret}></View>

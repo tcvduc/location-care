@@ -329,6 +329,14 @@ for our need
 + Android SDK Location: C:\Users\LENOVO\AppData\Local\Android\Sdk
 + ADV: Android Virtual Device
 
+6. Figma tools 
+- How to open web console 
+  + right click -> development -> open console
+
+- Integrate Figma Plugin With VS Code 
+  + ctrl + shift + B -> select tsc: watch - tsconfig.json.
+
+
 
 VI. Glean 
 + ISO: International Organization for Standardization

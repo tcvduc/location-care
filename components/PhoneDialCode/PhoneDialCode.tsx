@@ -1,8 +1,10 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
+import {
+  appColors,
+  commonBorderRadiusValue,
+} from "../../config/global.variables";
 import PhoneDialCodeShortDescription from "./PhoneDialCodeShortDescription";
-import { commonBorderRadiusValue } from "../../config/global.variables";
-import { appColors } from "../../config/global.variables";
 import { phoneDialCodeTextInputWidth } from "./PhoneDialCodeVariables";
 
 const PhoneDialCode = () => {

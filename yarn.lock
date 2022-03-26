@@ -1252,6 +1252,11 @@
     "lodash.pick" "^4.4.0"
     "lodash.template" "^4.5.0"
 
+"@figma/plugin-typings@^1.43.0":
+  "integrity" "sha512-FxLGYkMkTg87cw5O1S2qQVDCCFfuJpfJP3qKeLg9zmQ1yPD6trLvkeHau48XCYFzcd9o5Milaft/gfjGJ/BvTg=="
+  "resolved" "https://registry.npmjs.org/@figma/plugin-typings/-/plugin-typings-1.43.0.tgz"
+  "version" "1.43.0"
+
 "@hapi/hoek@^9.0.0":
   "integrity" "sha512-gfta+H8aziZsm8pZa0vj04KO6biEiisppNgA1kbJvFrrWu9Vm7eaUEy76DIxsuTaWvti5fkJVhllWc6ZTE+Mdw=="
   "resolved" "https://registry.npmjs.org/@hapi/hoek/-/hoek-9.2.1.tgz"

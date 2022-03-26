@@ -1,4 +1,4 @@
-import { FlexAlignType, ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { FlexAlignType } from "react-native";
 
 const countryCodes = [
   {

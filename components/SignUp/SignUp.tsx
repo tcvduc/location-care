@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { Text, View } from "react-native";
 
-const SignUp = (props: any) => {
+const SignUp = () => {
   return (
     <View>
       <Text>Sign up</Text>

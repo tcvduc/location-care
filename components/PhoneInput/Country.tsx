@@ -1,15 +1,15 @@
 class Country {
   private countryDialCodes: any[];
-  private countriesData: any;
-  private countries: any;
+  // private countriesData: any;
+  // private countries: any;
 
   constructor() {
     this.countryDialCodes = [];
-    this.countriesData = null;
+    // this.countriesData = null;
   }
 
-  setCustomCountriesData(json: any) {
-    this.countriesData = json;
+  setCustomCountriesData() {
+    // this.countriesData = json;
   }
 
   addCountryCode(iso2: string, dialCode: string, priority?: any) {

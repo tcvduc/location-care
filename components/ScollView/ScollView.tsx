@@ -1,10 +1,9 @@
-import React from "react";
 import {
-  ScrollView,
   SafeAreaView,
-  Text,
-  StyleSheet,
+  ScrollView,
   StatusBar,
+  StyleSheet,
+  Text,
 } from "react-native";
 
 const ScollView = () => {
