@@ -1,7 +1,41 @@
 Corpse 1: Get family's members location through mobile phone - mobile app 
 - Get the person who you care location throught mobile phone - mobile app 
 
-App name: Location Care
+App name Ver 1: Location Care
+App name Ver 2: 
+- problem: 
++ App Name is too long 
++ The word Care is too reveal 
+-> Solve this using Grab idea: one word - Grab 
+- some english relative words:
++ location 
++ care 
++ look 
++ mobile phone 
++ observe 
++ map  
++ worry 
++ helper stuff to kill somebody 
++ a matrix 
++ baby learn to do stuff 
++ baby learn to join the system 
++ Flow  
+  + stuff move through eye -> eye nerves -> brain nerves 
+  + look something -> create electrical signal -> brain process system 
+
+-> Temporary Result 1: Signal - should use verb for the active in the app essence?
+-> Temporary Result 2: Sign  
+
+-> Final App Name Ver 2 Result: 
+What the app name should be? Later
+
++ App essence ? 
+  -> look another person location through mobile phone 
++ Use verb or noun or another word type?
+  ->  use any word type is okay as long as it
+  describe the app eseence
+
+
 
 - Flow 
 
@@ -221,6 +255,14 @@ I. User Experience
   + Black color damage our pupil
     -> Decreasing the black opacity 
     -> linear gradient color - use this
+
+  6. The users use the app for kill somebody purpose 
+  6.1. war 
+  -> Just remove the app from the country 
+  6.2. random sapiens 
+  -> If a sapiens really want to kill somebody, there are a lot of ways to 
+  do. 
+  -> Learn privacy from Grab 
 
 
 II. User Interface

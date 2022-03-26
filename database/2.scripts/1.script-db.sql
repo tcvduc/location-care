@@ -12,3 +12,6 @@ create table stuff_need_to_do(
 );
 
 
+insert into stuff_need_to_do (stuff_name, is_done) values ("asdasd",true);
+insert into stuff_need_to_do (stuff_name, is_done) values ("asdasd2",true);
+insert into stuff_need_to_do (stuff_name, is_done) values ("czxczxc",true);
