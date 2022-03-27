@@ -22,6 +22,23 @@ insert into `stuffNeedToDo` (stuffName, isDone) values ("asdasd",true);
 insert into `stuffNeedToDo` (stuffName, isDone) values ("asdasd2",false);
 insert into `stuffNeedToDo` (stuffName, isDone) values ("czxczxc",true);
 
+-- --------------------------------
+-- Table For `origins`
+-- --------------------------------
+
+create table `origins`(
+	id int auto_increment,
+    origin varchar(200),
+    primary key (id)
+);
+
+insert into `origins` (origin) values ("http://example1.com");
+insert into `origins` (origin) values ("http://example2.com");
+
+
+
+
+
 
 
 

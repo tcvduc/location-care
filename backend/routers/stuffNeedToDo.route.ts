@@ -1,19 +1,33 @@
 import { Request, Response, NextFunction } from "express";
-import axios, { AxiosResponse } from "axios";
 import express from "express";
 import stuffNeedToDoModel from "../models/stuffNeedToDo.model";
 const router = express.Router();
 
-router.get(
-  "/",
-  async function (req: Request, res: Response, next: NextFunction) {
-    const data = await stuffNeedToDoModel.getAll();
-    console.log("data: ", data);
+router.get("/", async function (req: Request, res: Response) {
+  const data = await stuffNeedToDoModel.getAll();
 
+  return res.json({
+    data: data,
+  });
+});
+
+router.patch("/", async function (req: Request, res: Response) {
+  if (req.body.id === undefined || req.body.isDone === undefined) {
     return res.json({
-      data: data,
+      message: "Body error!",
     });
   }
-);
+
+  const { id, isDone } = req.body;
+
+  const ret = await stuffNeedToDoModel.editIsDone(id, isDone);
+
+  return res.json({
+    message: "Update isDone successfully!",
+    ret,
+    isDone: isDone,
+    id: id,
+  });
+});
 
 export default router;

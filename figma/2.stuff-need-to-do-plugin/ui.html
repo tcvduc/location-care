@@ -57,102 +57,195 @@
     <button id="add_new_stuff_button">Add</button>
   </div>
 
-
   <div id="listStuff"></div>
 </div>
 
 <script>
-  /**
-   *
-   * @param {string} text
-   * @param {number} index
-   * @param {boolean} isDoneValue
-   *
-   */
-  function createOneStuffNeedToDoElement(text, index, isDoneValue) {
-    const stuffHTMLCode = `
-  <div class="stuff" >
-    <span class="stuffName" >${index}. ${text}</span>
-    <input  class="isDone" type="checkbox" checked={isDone} />
-  </div>
-  `;
+  function startScript() {
+    const backendAPIURI = "http://localhost:1212";
+    const stuffNeedToDoAPIURI = "/api/stuffNeedToDo";
+    /**
+     *
+     * @param {string} text
+     * @param {number} index
+     * @param {boolean} isDoneValue
+     *
+     */
+    function createOneStuffNeedToDoElement(text, index, isDoneValue) {
+      const stuffHTMLCode = `
+<div class="stuff" >
+  <span class="stuffName" >${index}. ${text}</span>
+  <input  data-id={index} class="isDone" type="checkbox" checked={isDone} />
+</div>
+`;
 
-    const stuff = document.createElement("div");
-    stuff.classList.add("stuff");
+      const stuff = document.createElement("div");
+      stuff.classList.add("stuff");
 
-    const stuffName = document.createElement("div");
-    stuffName.classList.add("stuffName");
+      const stuffName = document.createElement("div");
+      stuffName.classList.add("stuffName");
 
-    const isDone = document.createElement("input");
-    isDone.classList.add("isDone");
-    isDone.type = "checkbox";
-    isDone.checked = isDoneValue;
+      const isDone = document.createElement("input");
+      isDone.classList.add("isDone");
+      isDone.type = "checkbox";
+      isDone.checked = isDoneValue;
+      isDone.setAttribute("data-id", index);
 
-    stuffName.textContent = index + ". " + text;
-    stuff.appendChild(stuffName);
-    stuff.appendChild(isDone);
+      stuffName.textContent = index + ". " + text;
+      stuff.appendChild(stuffName);
+      stuff.appendChild(isDone);
 
-    return stuff;
-  }
+      return stuff;
+    }
 
-  async function getDataStuffNeedToDo() {
-    const backend_API_URI = "http://localhost:1212";
-    const api_uri = "/api/stuffNeedToDo";
-    const request_URI = backend_API_URI + api_uri;
-    const init = {
-      mode: "cors", // no-cors, *cors, same-origin
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      // body: JSON.stringify(data), // body data type must match "Content-Type" header
-    };
+    async function getDataStuffNeedToDo() {
+      const request_URI = backendAPIURI + stuffNeedToDoAPIURI;
+      const init = {
+        mode: "cors", // no-cors, *cors, same-origin
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        // body: JSON.stringify(data), // body data type must match "Content-Type" header
+      };
 
-    return new Promise((resolve) => {
-      const ret1 = fetch(request_URI, {})
-        .then((res) => res.json())
+      return new Promise((resolve) => {
+        const ret1 = fetch(request_URI, {})
+          .then((res) => res.json())
+          .then((ret) => {
+            resolve(ret);
+          });
+      });
+    }
+
+    /**
+     *
+     * @param {string} stuffName
+     */
+    async function addNewStuff(stuffName) {
+      const data = {
+        stuffName: stuffName,
+      };
+
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data),
+      };
+
+      const ret = fetch(backendAPIURI + stuffNeedToDoAPIURI, fetchOptions)
+        .then((ret) => ret.json())
         .then((ret) => {
-          resolve(ret);
+          console.log(ret);
         });
-    });
-  }
+    }
 
-  function handleAddNewStuffButtonOnclick() {
-    const add_new_stuff_button = document.getElementById(
-      "add_new_stuff_button"
-    );
-    add_new_stuff_button.addEventListener("mousedown", () => {
-      add_new_stuff_button.classList.add("add_new_stuff_button_onclick");
-
-      getDataStuffNeedToDo();
-    });
-
-    add_new_stuff_button.addEventListener("mouseup", () => {
-      add_new_stuff_button.classList.remove("add_new_stuff_button_onclick");
-    });
-  }
-
-  async function displayStuffNeedToDo() {
-    const ret = await getDataStuffNeedToDo();
-
-    const listStuff = document.getElementById("listStuff");
-    for (let i = ret.data.length - 1; i >= 0; --i) {
-      const stuff = createOneStuffNeedToDoElement(
-        ret.data[i].stuffName,
-        ret.data[i].id,
-        ret.data[i].isDone
+    function handleAddNewStuffButtonOnclick() {
+      const add_new_stuff_button = document.getElementById(
+        "add_new_stuff_button"
       );
-      listStuff.appendChild(stuff);
+
+      add_new_stuff_button.addEventListener("mousedown", async () => {
+        add_new_stuff_button.classList.add("add_new_stuff_button_onclick");
+        const input_enter_new_stuff = document.getElementById(
+          "input_enter_new_stuff"
+        );
+        if (input_enter_new_stuff.value.length === 0) {
+          return alert("Cannot empty!");
+        }
+
+  
+        const stuffName = input_enter_new_stuff.value
+
+        const ret = await addNewStuff(stuffName);
+        console.log("ret: ", ret);
+      });
+
+      add_new_stuff_button.addEventListener("mouseup", () => {
+        add_new_stuff_button.classList.remove("add_new_stuff_button_onclick");
+      });
+    }
+
+    async function displayStuffNeedToDo() {
+      const ret = await getDataStuffNeedToDo();
+
+      const listStuff = document.getElementById("listStuff");
+      listStuff.innerHTML = "";
+
+      for (let i = ret.data.length - 1; i >= 0; --i) {
+        const stuff = createOneStuffNeedToDoElement(
+          ret.data[i].stuffName,
+          ret.data[i].id,
+          ret.data[i].isDone
+        );
+        listStuff.appendChild(stuff);
+      }
+    }
+
+    async function handleCheckBoxesIsDoneOnclick() {
+      const listIsDoneCheckBoxesInput =
+        document.getElementsByClassName("isDone");
+
+      for (let i = listIsDoneCheckBoxesInput.length - 1; i >= 0; --i) {
+        listIsDoneCheckBoxesInput[i].onchange = async function (event) {
+          const id = listIsDoneCheckBoxesInput[i].getAttribute("data-id");
+          const isDone = event.target.checked;
+          const retEdit = await editIsDoneStuff(id, isDone);
+        };
+      }
+    }
+
+    /**
+     *
+     * @param {Number} id
+     * @param {boolean} isDone
+     *
+     */
+    async function editIsDoneStuff(id, isDone) {
+      const uri = backendAPIURI + stuffNeedToDoAPIURI;
+      const data = {
+        id: id,
+        isDone: isDone,
+      };
+      const fetchOptions = {
+        method: "PATCH",
+        mode:"cors",
+        credentials:"omit",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+
+        body: JSON.stringify(data),
+      };
+
+      return new Promise((resolve) => {
+        const ret = fetch(uri, fetchOptions)
+          .then((ret) => ret.json())
+          .then((ret) => {
+            resolve(ret);
+          });
+      });
+    }
+
+    async function main() {
+      handleAddNewStuffButtonOnclick();
+      await displayStuffNeedToDo();
+      await handleCheckBoxesIsDoneOnclick();
+    }
+
+    {
+      main();
     }
   }
 
-  {
-    handleAddNewStuffButtonOnclick();
-    displayStuffNeedToDo();
-  }
+  startScript();
 </script>

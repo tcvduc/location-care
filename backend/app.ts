@@ -2,9 +2,27 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import stuffNeedToDoRouter from "./routers/stuffNeedToDo.route";
 import slashRouter from "./routers/slash.route";
 import http from "http";
+import cors from "cors";
+import db from "./config/database.config";
 
 (() => {
+  let allowOriginList = ["http://example1.com"];
+
+  const corsOptions = {
+    origin: async function (origin: never, callback: Function) {
+      const origins: [] = await db.loadOrigins();
+      if (origins.indexOf(origin) !== -1) {
+        callback(null, true);
+      }
+
+      if (origins.indexOf(origin) === -1) {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  };
+
   let app: Express = express();
+
   // parse the request
   app.use(express.urlencoded({ extended: false }));
 
@@ -12,24 +30,25 @@ import http from "http";
   app.use(express.json());
 
   // API Rule
-  app.use(function (req: Request, res: Response, next: NextFunction) {
-    // set the CORS policy
-    res.header("Access-Control-Allow-Origin", "*");
-    // set the cors headers
-    res.header(
-      "Access-Control-Allow-Headers",
-      "origin, X-Requested-With,Content-Type,Accept,Authorization"
-    );
-    // set the cors method headers
-    if (req.method === "options") {
-      res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
-      return res.status(200).json({
-        options_request_method: "options_request_method",
-      });
-    }
+  app.use(cors(corsOptions));
+  // app.use(function (req: Request, res: Response, next: NextFunction) {
+  //   // set the CORS policy
+  //   res.header("Access-Control-Allow-Origin", "*");
+  //   // set the cors headers
+  //   res.header(
+  //     "Access-Control-Allow-Headers",
+  //     "origin, X-Requested-With,Content-Type,Accept,Authorization"
+  //   );
+  //   // set the cors method headers
+  //   if (req.method === "options") {
+  //     res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
+  //     return res.status(200).json({
+  //       options_request_method: "options_request_method",
+  //     });
+  //   }
 
-    next();
-  });
+  //   next();
+  // });
 
   // routers
   app.use("/", slashRouter);

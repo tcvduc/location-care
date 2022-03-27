@@ -398,7 +398,22 @@ for our need
   + Common stuff need to do string length is about 20 - 40, 
   so size = 80 is okay
 
-  
+8. Pure Javascript problem 
++ It does not update immediately when use fetch 
+  -> event.target.checked value automatically change when click
+
+9. Backend note 
+9.1. Octet 
+- Unit of digital information likes: computing, telecommunications
+- symbol: o 
+- Example:
+  + 1 o = 8 bits
+
+9.2. Maximum domain length 
+- Might 255 octets 
+- 2040 bits = ? varchar 
+
+
 V. Inspire quotes
 + Move the world forward - Mitsubishi
 + Forward together - Grab 

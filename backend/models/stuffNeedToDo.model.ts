@@ -3,7 +3,7 @@ import stuffNeedToDo from "../interfaces/stuffNeedToDo.interface";
 
 const tableName = "stuffNeedToDo";
 
-const stuff_need_to_do_model = {
+const stuffNeedToDoModel = {
   getAll: async function () {
     const sql = `select * from ${tableName}`;
 
@@ -15,6 +15,16 @@ const stuff_need_to_do_model = {
 
     return ret;
   },
+  editIsDone: async function (id: string, isDone: boolean) {
+    const sql = `update ${tableName} 
+    set isDone = ${isDone} 
+    where id = ${id};
+    `;
+
+    const ret = await db.load(sql);
+
+    return ret;
+  },
 };
 
-export default stuff_need_to_do_model;
+export default stuffNeedToDoModel;
