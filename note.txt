@@ -399,7 +399,10 @@ for our need
   so size = 80 is okay
 
   
-
+V. Inspire quotes
++ Move the world forward - Mitsubishi
++ Forward together - Grab 
++ Go beyond theory - infosec 
 
 VI. Glean 
 + ISO: International Organization for Standardization

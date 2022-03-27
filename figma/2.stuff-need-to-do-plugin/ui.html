@@ -4,7 +4,7 @@
   }
   #input_enter_new_stuff {
     height: 40px;
-    width: "70%";
+    width: 160px;
     padding-left: 12px;
   }
   #add_new_stuff_button {
@@ -24,6 +24,28 @@
     color: #fff;
     font-weight: bold;
   }
+
+  .stuff {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: "100%";
+    margin: 12px 0;
+  }
+
+  .stuffName {
+    width: 70%;
+    font-weight: bold;
+  }
+  .isDone {
+    width: 30%;
+    height: 30px;
+    width: 30px;
+  }
+
+  #listStuff {
+  }
 </style>
 <div id="container">
   <div id="add_form">
@@ -35,16 +57,79 @@
     <button id="add_new_stuff_button">Add</button>
   </div>
 
-  <input type="checkbox" />
+
+  <div id="listStuff"></div>
 </div>
 
 <script>
+  /**
+   *
+   * @param {string} text
+   * @param {number} index
+   * @param {boolean} isDoneValue
+   *
+   */
+  function createOneStuffNeedToDoElement(text, index, isDoneValue) {
+    const stuffHTMLCode = `
+  <div class="stuff" >
+    <span class="stuffName" >${index}. ${text}</span>
+    <input  class="isDone" type="checkbox" checked={isDone} />
+  </div>
+  `;
+
+    const stuff = document.createElement("div");
+    stuff.classList.add("stuff");
+
+    const stuffName = document.createElement("div");
+    stuffName.classList.add("stuffName");
+
+    const isDone = document.createElement("input");
+    isDone.classList.add("isDone");
+    isDone.type = "checkbox";
+    isDone.checked = isDoneValue;
+
+    stuffName.textContent = index + ". " + text;
+    stuff.appendChild(stuffName);
+    stuff.appendChild(isDone);
+
+    return stuff;
+  }
+
+  async function getDataStuffNeedToDo() {
+    const backend_API_URI = "http://localhost:1212";
+    const api_uri = "/api/stuffNeedToDo";
+    const request_URI = backend_API_URI + api_uri;
+    const init = {
+      mode: "cors", // no-cors, *cors, same-origin
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      // body: JSON.stringify(data), // body data type must match "Content-Type" header
+    };
+
+    return new Promise((resolve) => {
+      const ret1 = fetch(request_URI, {})
+        .then((res) => res.json())
+        .then((ret) => {
+          resolve(ret);
+        });
+    });
+  }
+
   function handleAddNewStuffButtonOnclick() {
     const add_new_stuff_button = document.getElementById(
       "add_new_stuff_button"
     );
     add_new_stuff_button.addEventListener("mousedown", () => {
       add_new_stuff_button.classList.add("add_new_stuff_button_onclick");
+
+      getDataStuffNeedToDo();
     });
 
     add_new_stuff_button.addEventListener("mouseup", () => {
@@ -52,22 +137,22 @@
     });
   }
 
-  const stuffNeedToDo = [
-    {
-      name: "",
-      isDone: false,
-    },
-    {
-      name: "",
-      isDone: false,
-    },
-    {
-      name: "",
-      isDone: false,
-    },
-  ];
+  async function displayStuffNeedToDo() {
+    const ret = await getDataStuffNeedToDo();
 
-  const container = document.getElementById("container");
+    const listStuff = document.getElementById("listStuff");
+    for (let i = ret.data.length - 1; i >= 0; --i) {
+      const stuff = createOneStuffNeedToDoElement(
+        ret.data[i].stuffName,
+        ret.data[i].id,
+        ret.data[i].isDone
+      );
+      listStuff.appendChild(stuff);
+    }
+  }
 
-  handleAddNewStuffButtonOnclick();
+  {
+    handleAddNewStuffButtonOnclick();
+    displayStuffNeedToDo();
+  }
 </script>

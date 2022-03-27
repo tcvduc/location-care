@@ -1,58 +1,57 @@
 import express, { Express, Request, Response, NextFunction } from "express";
-import stuffNeedToDoRouter from "./routers/stuff-need-to-do.route";
+import stuffNeedToDoRouter from "./routers/stuffNeedToDo.route";
+import slashRouter from "./routers/slash.route";
 import http from "http";
 
-let app = express();
+(() => {
+  let app: Express = express();
+  // parse the request
+  app.use(express.urlencoded({ extended: false }));
 
-// parse the request
-app.use(express.urlencoded({ extended: false }));
+  // parse json data
+  app.use(express.json());
 
-// parse json data
-app.use(express.json());
+  // API Rule
+  app.use(function (req: Request, res: Response, next: NextFunction) {
+    // set the CORS policy
+    res.header("Access-Control-Allow-Origin", "*");
+    // set the cors headers
+    res.header(
+      "Access-Control-Allow-Headers",
+      "origin, X-Requested-With,Content-Type,Accept,Authorization"
+    );
+    // set the cors method headers
+    if (req.method === "options") {
+      res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
+      return res.status(200).json({
+        options_request_method: "options_request_method",
+      });
+    }
 
-// API Rule
-app.use(function (req: Request, res: Response, next: NextFunction) {
-  // set the CORS policy
-  res.header("Access-Control-Allow-Origin", "*");
-  // set the cors headers
-  res.header(
-    "Access-Control-Allow-Headers",
-    "origin, X-Requested-With,Content-Type,Accept,Authorization"
-  );
-  // set the cors method headers
-  if (req.method === "options") {
-    res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
-    return res.status(200).json({
-      options_request_method: "options_request_method",
+    next();
+  });
+
+  // routers
+  app.use("/", slashRouter);
+  app.use("/api/stuffNeedToDo", stuffNeedToDoRouter);
+
+  // Error handling
+
+  app.use(function (req: Request, res: Response, next: NextFunction) {
+    const error = new Error("Not found!");
+    return res.status(404).json({
+      message: error.message,
     });
-  }
-
-  next();
-});
-
-// routers
-app.use("/", function (req: Request, res: Response) {
-  console.log("alo");
-  res.json({
-    message: "alo",
   });
-});
-// app.use("/stuff-need-to-do", stuffNeedToDoRouter);
 
-// Error handling
+  // backend server
+  const http_server: http.Server = http.createServer(app);
 
-app.use(function (req: Request, res: Response, next: NextFunction) {
-  const error = new Error("Not found!");
-  return res.status(404).json({
-    message: error.message,
+  const PORT: any = process.env.PORT ?? 1212;
+
+  http_server.listen(PORT, function () {
+    console.log(
+      `Location Care Backend is listening at PORT = ${PORT}\nURI: http://localhost:1212/`
+    );
   });
-});
-
-// backend server
-const http_server = http.createServer(app);
-
-const PORT: any = process.env.PORT ?? 1212;
-
-http_server.listen(PORT, function () {
-  console.log(`Location Care Backend is listening at PORT = ${PORT}`);
-});
+})();

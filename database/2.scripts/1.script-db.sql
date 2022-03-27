@@ -4,14 +4,35 @@ create database location_care;
 
 use location_care;
 
-create table `stuff_need_to_do`(
+-- --------------------------------
+-- Table For `stuff_need_to_do`
+-- --------------------------------
+
+create table `stuffNeedToDo`(
 	id int auto_increment,
-    stuff_name varchar(80),
-	is_done boolean,
+    stuffName varchar(80),
+	isDone boolean,
     primary key (id)
 );
 
+-- --------------------------------
+-- Records For `stuff_need_to_do`
+-- --------------------------------
+insert into `stuffNeedToDo` (stuffName, isDone) values ("asdasd",true);
+insert into `stuffNeedToDo` (stuffName, isDone) values ("asdasd2",false);
+insert into `stuffNeedToDo` (stuffName, isDone) values ("czxczxc",true);
 
-insert into stuff_need_to_do (stuff_name, is_done) values ("asdasd",true);
-insert into stuff_need_to_do (stuff_name, is_done) values ("asdasd2",true);
-insert into stuff_need_to_do (stuff_name, is_done) values ("czxczxc",true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

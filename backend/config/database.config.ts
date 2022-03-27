@@ -1,26 +1,22 @@
 import mysql from "mysql";
+import util from "util";
 
-let connection = mysql.createConnection({
+let pool = mysql.createPool({
+  connectionLimit: 5,
   host: "localhost",
   user: "root",
-  password: "tramylemy",
+  password: "1",
   database: "location_care",
+  insecureAuth: true,
 });
 
-function queryDatabase(query: string) {
-  connection.connect();
+// promisify bind pool to a promise and remove callback
+const pool_query = util.promisify(pool.query).bind(pool);
 
-  connection.query(query, function (err, ret, fields) {
-    if (err) {
-      throw err;
-    }
+const db = {
+  load: function load(sql: string) {
+    return pool_query(sql);
+  },
+};
 
-    console.log("ret: ", ret);
-
-    console.log("the solution is: ", ret[0].solution);
-  });
-
-  connection.end();
-}
-
-export { queryDatabase };
+export default db;
