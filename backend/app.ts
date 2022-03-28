@@ -1,27 +1,24 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 import stuffNeedToDoRouter from "./routers/stuffNeedToDo.route";
+import originsRouter from "./routers/origins.route";
 import slashRouter from "./routers/slash.route";
 import http from "http";
-import cors from "cors";
 import db from "./config/database.config";
+import originsModel from "./models/origins.model";
+import cors from "cors";
 
 (() => {
   let allowOriginList = ["http://example1.com"];
 
-  const corsOptions = {
-    origin: async function (origin: never, callback: Function) {
-      const origins: [] = await db.loadOrigins();
-      if (origins.indexOf(origin) !== -1) {
-        callback(null, true);
-      }
+  let app: Express = express();
 
-      if (origins.indexOf(origin) === -1) {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+  // CORS
+  const corsOptions: cors.CorsOptions = {
+    origin: allowOriginList,
+    allowedHeaders: ["dasd"],
   };
 
-  let app: Express = express();
+  app.use(cors(corsOptions));
 
   // parse the request
   app.use(express.urlencoded({ extended: false }));
@@ -29,16 +26,28 @@ import db from "./config/database.config";
   // parse json data
   app.use(express.json());
 
-  // API Rule
-  app.use(cors(corsOptions));
+  // API Cors Rule
   // app.use(function (req: Request, res: Response, next: NextFunction) {
   //   // set the CORS policy
-  //   res.header("Access-Control-Allow-Origin", "*");
+
+  //   // Allow all origins/domain/uri access api/resources
+  //   // res.header("Access-Control-Allow-Origin", "*");
+
+  //   // Allow only https://www.twilio.com access our api/resouces
+  //   // res.header("Access-Control-Allow-Origin", "https://twilio.com");
+
+  //   // Allow https://www.twilio.com, https://google.com access api/resouces
+  //   res.header("Access-Control-Allow-Origin", [
+  //     "https://www.twilio.com",
+  //     "https://www.google.com",
+  //   ]);
+
   //   // set the cors headers
   //   res.header(
   //     "Access-Control-Allow-Headers",
   //     "origin, X-Requested-With,Content-Type,Accept,Authorization"
   //   );
+  //   res.header("allow", "GET PATCH DELETE POST");
   //   // set the cors method headers
   //   if (req.method === "options") {
   //     res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
@@ -53,6 +62,7 @@ import db from "./config/database.config";
   // routers
   app.use("/", slashRouter);
   app.use("/api/stuffNeedToDo", stuffNeedToDoRouter);
+  app.use("/api/origins", originsRouter);
 
   // Error handling
 

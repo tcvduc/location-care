@@ -4,6 +4,7 @@
   "description": "location care backend",
   "main": "app.js",
   "scripts": {
+    "virtual-origin-server": "ts-node vitual-origin-server.ts",
     "start": "ts-node app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

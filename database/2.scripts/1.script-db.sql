@@ -18,7 +18,7 @@ create table `stuffNeedToDo`(
 -- --------------------------------
 -- Records For `stuff_need_to_do`
 -- --------------------------------
-insert into `stuffNeedToDo` (stuffName, isDone) values ("asdasd",true);
+insert into `stuffNeedToDo` (stuffName, isDone) values ("CORS Problem",false);
 insert into `stuffNeedToDo` (stuffName, isDone) values ("asdasd2",false);
 insert into `stuffNeedToDo` (stuffName, isDone) values ("czxczxc",true);
 

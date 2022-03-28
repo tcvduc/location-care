@@ -413,6 +413,26 @@ for our need
 - Might 255 octets 
 - 2040 bits = ? varchar 
 
+9.3. CORS 
+- CORS: Cross Origin Resource Sharing 
+- Summary: Allow/not allow another origin/domain/uri
+access our application resouces/api
+
+9.4. keyword of https://www.example.com 
++ https: protocol/scheme
++ www.example.com: domain
+
+- Origin:
+  - Example 1: https://www.twilio.com
+  + scheme: https
+  + hostname: www.twilio.com
+
+  - Example 2: https://localhost:5000
+  + scheme: https
+  + hostname: localhost 
+  + port: 5000
+
+    
 
 V. Inspire quotes
 + Move the world forward - Mitsubishi

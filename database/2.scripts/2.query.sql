@@ -23,7 +23,11 @@ update `stuffNeedToDo`
 set isDone = true 
 where id = '1';
 
-
+-- --------------------------------------------
+-- 4. Load origins
+-- --------------------------------------------
+select *
+from `origins`;
 
 
 
