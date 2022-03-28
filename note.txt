@@ -432,6 +432,9 @@ access our application resouces/api
   + hostname: localhost 
   + port: 5000
 
+9.5.CSRF 
+- CSRF: Cross Site Request Forgery
+
     
 
 V. Inspire quotes

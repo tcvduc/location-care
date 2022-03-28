@@ -13,12 +13,12 @@ import cors from "cors";
   let app: Express = express();
 
   // CORS
-  const corsOptions: cors.CorsOptions = {
-    origin: allowOriginList,
-    allowedHeaders: ["dasd"],
-  };
+  // const corsOptions: cors.CorsOptions = {
+  //   origin: allowOriginList,
+  //   allowedHeaders: ["dasd"],
+  // };
 
-  app.use(cors(corsOptions));
+  // app.use(cors(corsOptions));
 
   // parse the request
   app.use(express.urlencoded({ extended: false }));
@@ -27,37 +27,43 @@ import cors from "cors";
   app.use(express.json());
 
   // API Cors Rule
-  // app.use(function (req: Request, res: Response, next: NextFunction) {
-  //   // set the CORS policy
+  app.use(function (req: Request, res: Response, next: NextFunction) {
+    // set the CORS policy
 
-  //   // Allow all origins/domain/uri access api/resources
-  //   // res.header("Access-Control-Allow-Origin", "*");
+    // Allow all origins/domain/uri access api/resources
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
 
-  //   // Allow only https://www.twilio.com access our api/resouces
-  //   // res.header("Access-Control-Allow-Origin", "https://twilio.com");
+    // Allow only https://www.twilio.com access our api/resouces
+    // res.header("Access-Control-Allow-Origin", "https://twilio.com");
 
-  //   // Allow https://www.twilio.com, https://google.com access api/resouces
-  //   res.header("Access-Control-Allow-Origin", [
-  //     "https://www.twilio.com",
-  //     "https://www.google.com",
-  //   ]);
+    // Allow https://www.twilio.com, https://google.com access api/resouces
+    // res.header("Access-Control-Allow-Origin", [
+    //   "https://www.twilio.com",
+    //   "https://www.google.com",
+    // ]);
 
-  //   // set the cors headers
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "origin, X-Requested-With,Content-Type,Accept,Authorization"
-  //   );
-  //   res.header("allow", "GET PATCH DELETE POST");
-  //   // set the cors method headers
-  //   if (req.method === "options") {
-  //     res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
-  //     return res.status(200).json({
-  //       options_request_method: "options_request_method",
-  //     });
-  //   }
+    // set the cors headers
+    res.header(
+      "Access-Control-Allow-Headers",
+      "origin, X-Requested-With,Content-Type,Accept,Authorization"
+    );
 
-  //   next();
-  // });
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD"
+    );
+
+    // set the cors method headers
+    // if (req.method === "options") {
+    //   res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
+    //   return res.status(200).json({
+    //     options_request_method: "options_request_method",
+    //   });
+    // }
+
+    next();
+  });
 
   // routers
   app.use("/", slashRouter);

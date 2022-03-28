@@ -7,7 +7,7 @@
     width: 160px;
     padding-left: 12px;
   }
-  #add_new_stuff_button {
+  #add_new_stuff_button:dis {
     height: 40px;
     width: 100px;
     color: #fff;
@@ -46,7 +46,18 @@
 
   #listStuff {
   }
+
+  .add_new_stuff_button_disabled {
+    opacity: 0.5;
+    
+  }
+
+  #add_new_stuff_button:disabled{
+    cursor: not-allowed;
+    
+  }
 </style>
+
 <div id="container">
   <div id="add_form">
     <input
@@ -64,6 +75,39 @@
   function startScript() {
     const backendAPIURI = "http://localhost:1212";
     const stuffNeedToDoAPIURI = "/api/stuffNeedToDo";
+
+    /**
+     *
+     * @param {HTMLInputElement} input_enter_new_stuff
+     */
+    function toggleDisableButtonAddNewStuff(input_enter_new_stuff) {
+      if (input_enter_new_stuff.value.length === 0) {
+        const add_new_stuff_button = document.getElementById(
+          "add_new_stuff_button"
+        );
+        add_new_stuff_button.classList.add("add_new_stuff_button_disabled");
+        // add_new_stuff_button.disabled = true;
+      }
+
+      if (input_enter_new_stuff.value.length !== 0) {
+        const add_new_stuff_button = document.getElementById(
+          "add_new_stuff_button"
+        );
+        add_new_stuff_button.classList.remove("add_new_stuff_button_disabled");
+        // add_new_stuff_button.disabled = false;
+      }
+    }
+
+    function disableAddButtonWhenFirstTimeRender() {
+      const input_enter_new_stuff = document.getElementById(
+        "input_enter_new_stuff"
+      );
+      input_enter_new_stuff.addEventListener("input", function () {
+        toggleDisableButtonAddNewStuff(input_enter_new_stuff);
+      });
+      toggleDisableButtonAddNewStuff(input_enter_new_stuff);
+    }
+
     /**
      *
      * @param {string} text
@@ -100,22 +144,24 @@
 
     async function getDataStuffNeedToDo() {
       const request_URI = backendAPIURI + stuffNeedToDoAPIURI;
-      const init = {
+      const fetchOptions = {
+        // mode: "no-cors", // no-cors, *cors, same-origin
         mode: "cors", // no-cors, *cors, same-origin
+
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
+        // credentials: "same-origin", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json",
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        // redirect: "follow", // manual, *follow, error
+        // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
         // body: JSON.stringify(data), // body data type must match "Content-Type" header
       };
 
       return new Promise((resolve) => {
-        const ret1 = fetch(request_URI, {})
+        const ret1 = fetch(request_URI, fetchOptions)
           .then((res) => res.json())
           .then((ret) => {
             resolve(ret);
@@ -159,11 +205,20 @@
           "input_enter_new_stuff"
         );
         if (input_enter_new_stuff.value.length === 0) {
-          return alert("Cannot empty!");
+          const add_new_stuff_button = document.getElementById(
+            "add_new_stuff_button"
+          );
+          add_new_stuff_button.setAttribute("disabled", true);
         }
 
-  
-        const stuffName = input_enter_new_stuff.value
+        if (input_enter_new_stuff.value.length !== 0) {
+          const add_new_stuff_button = document.getElementById(
+            "add_new_stuff_button"
+          );
+          add_new_stuff_button.setAttribute("disabled", false);
+        }
+
+        const stuffName = input_enter_new_stuff.value;
 
         const ret = await addNewStuff(stuffName);
         console.log("ret: ", ret);
@@ -216,14 +271,19 @@
         isDone: isDone,
       };
       const fetchOptions = {
-        method: "PATCH",
-        mode:"cors",
-        credentials:"omit",
+        // mode: "no-cors", // no-cors, *cors, same-origin
+        mode: "cors", // no-cors, *cors, same-origin
+
+        method: "put", // *GET, POST, PUT, DELETE, etc.
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: "same-origin", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json",
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-
+        // redirect: "follow", // manual, *follow, error
+        // referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        // body: JSON.stringify(data), // body data type must match "Content-Type" header
         body: JSON.stringify(data),
       };
 
@@ -237,6 +297,7 @@
     }
 
     async function main() {
+      disableAddButtonWhenFirstTimeRender();
       handleAddNewStuffButtonOnclick();
       await displayStuffNeedToDo();
       await handleCheckBoxesIsDoneOnclick();

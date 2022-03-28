@@ -11,7 +11,7 @@ router.get("/", async function (req: Request, res: Response) {
   });
 });
 
-router.patch("/", async function (req: Request, res: Response) {
+router.put("/", async function (req: Request, res: Response) {
   if (req.body.id === undefined || req.body.isDone === undefined) {
     return res.json({
       message: "Body error!",
