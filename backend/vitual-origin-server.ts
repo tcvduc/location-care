@@ -1,5 +1,6 @@
 import express from "express";
 import axios from "axios";
+import http from "http";
 const app = express();
 
 const PORT = process.env.PORT ?? 1313;
@@ -9,6 +10,30 @@ const PORT = process.env.PORT ?? 1313;
 //     message: "Virtual origin server",
 //   });
 // });
+
+for (let i = 1000000; i >= 1; --i) {
+  const serverIndex = express();
+  const port = i;
+
+  const options = {
+    host: "http://localhost:1212",
+    port: 8070,
+    path: "/",
+    method: "get",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      // "Content-Length": Buffer.byteLength(data),
+    },
+  };
+
+  http.request(options, function (res) {
+    console.log(res);
+  });
+
+  serverIndex.listen(port, () => {
+    console.log(`Server ${i} is listening at port: ${port}`);
+  });
+}
 
 app.get(
   "/request-to-origin-http://localhost:1212-method-get",

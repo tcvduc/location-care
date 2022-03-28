@@ -1,5 +1,5 @@
 export default interface stuffNeedToDo {
-  id: Number;
+  id: number;
   stuffName: String;
   isDone: Boolean;
 }

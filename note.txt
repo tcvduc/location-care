@@ -435,7 +435,43 @@ access our application resouces/api
 9.5.CSRF 
 - CSRF: Cross Site Request Forgery
 
-    
+9.6. My SQL Problem
+9.6.1. auto_increment, delete record not work 
+- Change auto_increment to code in vs code. 
+
+9.6.2. What is threads connect in mysql
+  + Total number of client access to database server
+
+
+10. Web Browser Essence
+10.1. Summary 
+- A Software 
+- To access World Wide Web
+
+10.2. Relative info 
+- World Wide Web / Web : Web
+- Web ?
+  + 
+
+11. 1m user do write/read records at the same time problem
++ Understand single thread
+  + Do one stuff at a time.
+  + What is the truth when 1m user do read/write records in the app? 
+    + 1m request to the Backend server -> 1m request to the database server 
+    + 
+
++ Before good bye JS/TS test 1m virtual server request to access api
+and check if the JS/TS can turn from single thread to multiple threads
+
+12. DNS Essence 
+- DNS: Domain Name System 
+- Essencen: IP Addess
+  + IPV4:
+    + 4,294,967,296 IPv4 addresses <=> 2**32 (address0
+    + 32 bits
+  + IPV6:
+    + 340,282,366,920,938,463,463,374,607,431,768,211,456 <=> 2**128 address
+    + 128 bits
 
 V. Inspire quotes
 + Move the world forward - Mitsubishi

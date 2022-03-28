@@ -25,6 +25,31 @@ const stuffNeedToDoModel = {
 
     return ret;
   },
+
+  getLastRecord: async function () {
+    const sql = `select * 
+    from ${tableName}
+    order by id desc 
+    limit 1;
+    `;
+
+    const ret = await db.load(sql);
+
+    return ret;
+  },
+
+  add: async function (stuff: stuffNeedToDo): Promise<unknown> {
+    const sql = `insert into ${tableName} (id,stuffName,isDone) 
+    values (${stuff.id},"${stuff.stuffName}",${stuff.isDone});`;
+
+    const ret: stuffNeedToDo[] | unknown = await db.load(sql);
+
+    if (ret !== undefined && ret instanceof Array) {
+      return ret[0];
+    }
+
+    return ret;
+  },
 };
 
 export default stuffNeedToDoModel;

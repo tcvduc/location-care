@@ -1,6 +1,6 @@
-const a: any[] = [];
-const b: any[] = [1, 2, 3];
+type t = {
+  a: Number;
+};
 
-console.log(JSON.stringify(a) === "[]");
-console.log(JSON.stringify(b) === "[1,2,3]");
-console.log(JSON.stringify(b));
+const a: t[] = [{ a: 1 }];
+console.log(a instanceof Array);

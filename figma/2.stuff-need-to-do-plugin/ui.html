@@ -7,7 +7,7 @@
     width: 160px;
     padding-left: 12px;
   }
-  #add_new_stuff_button:dis {
+  #add_new_stuff_button {
     height: 40px;
     width: 100px;
     color: #fff;
@@ -28,7 +28,7 @@
   .stuff {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: "100%";
     margin: 12px 0;
@@ -49,12 +49,10 @@
 
   .add_new_stuff_button_disabled {
     opacity: 0.5;
-    
   }
 
-  #add_new_stuff_button:disabled{
+  #add_new_stuff_button:disabled {
     cursor: not-allowed;
-    
   }
 </style>
 
@@ -86,7 +84,7 @@
           "add_new_stuff_button"
         );
         add_new_stuff_button.classList.add("add_new_stuff_button_disabled");
-        // add_new_stuff_button.disabled = true;
+        add_new_stuff_button.disabled = true;
       }
 
       if (input_enter_new_stuff.value.length !== 0) {
@@ -94,7 +92,7 @@
           "add_new_stuff_button"
         );
         add_new_stuff_button.classList.remove("add_new_stuff_button_disabled");
-        // add_new_stuff_button.disabled = false;
+        add_new_stuff_button.disabled = false;
       }
     }
 
@@ -102,9 +100,17 @@
       const input_enter_new_stuff = document.getElementById(
         "input_enter_new_stuff"
       );
-      input_enter_new_stuff.addEventListener("input", function () {
-        toggleDisableButtonAddNewStuff(input_enter_new_stuff);
-      });
+      input_enter_new_stuff.focus();
+      input_enter_new_stuff.addEventListener(
+        "input",
+        /**
+         *
+         * @param {InputEvent} event
+         */
+        async function (event) {
+          toggleDisableButtonAddNewStuff(input_enter_new_stuff);
+        }
+      );
       toggleDisableButtonAddNewStuff(input_enter_new_stuff);
     }
 
@@ -117,11 +123,11 @@
      */
     function createOneStuffNeedToDoElement(text, index, isDoneValue) {
       const stuffHTMLCode = `
-<div class="stuff" >
-  <span class="stuffName" >${index}. ${text}</span>
-  <input  data-id={index} class="isDone" type="checkbox" checked={isDone} />
-</div>
-`;
+  <div class="stuff" >
+    <span class="stuffName" >${index}. ${text}</span>
+    <input  data-id={index} class="isDone" type="checkbox" checked={isDone} />
+  </div>
+  `;
 
       const stuff = document.createElement("div");
       stuff.classList.add("stuff");
@@ -187,11 +193,13 @@
         body: JSON.stringify(data),
       };
 
-      const ret = fetch(backendAPIURI + stuffNeedToDoAPIURI, fetchOptions)
-        .then((ret) => ret.json())
-        .then((ret) => {
-          console.log(ret);
-        });
+      return new Promise(function (resolve) {
+        const ret = fetch(backendAPIURI + stuffNeedToDoAPIURI, fetchOptions)
+          .then((ret) => ret.json())
+          .then((ret) => {
+            resolve(ret);
+          });
+      });
     }
 
     function handleAddNewStuffButtonOnclick() {
@@ -201,27 +209,24 @@
 
       add_new_stuff_button.addEventListener("mousedown", async () => {
         add_new_stuff_button.classList.add("add_new_stuff_button_onclick");
+
         const input_enter_new_stuff = document.getElementById(
           "input_enter_new_stuff"
         );
-        if (input_enter_new_stuff.value.length === 0) {
-          const add_new_stuff_button = document.getElementById(
-            "add_new_stuff_button"
-          );
-          add_new_stuff_button.setAttribute("disabled", true);
-        }
 
-        if (input_enter_new_stuff.value.length !== 0) {
-          const add_new_stuff_button = document.getElementById(
-            "add_new_stuff_button"
-          );
-          add_new_stuff_button.setAttribute("disabled", false);
-        }
+        toggleDisableButtonAddNewStuff(input_enter_new_stuff);
 
         const stuffName = input_enter_new_stuff.value;
 
         const ret = await addNewStuff(stuffName);
-        console.log("ret: ", ret);
+
+        if (ret.result.affectedRows) {
+          if (ret.result.affectedRows === 1) {
+            return await displayStuffNeedToDo();
+          }
+        }
+
+        return alert("Add failed!");
       });
 
       add_new_stuff_button.addEventListener("mouseup", () => {
@@ -296,9 +301,50 @@
       });
     }
 
+    function handleInpuEnterNewStuffOnkeydown() {
+      const input_enter_new_stuff = document.getElementById(
+        "input_enter_new_stuff"
+      );
+
+      input_enter_new_stuff.onkeydown =
+        /**
+         *
+         * @param {KeyboardEvent} event
+         */
+        async (event) => {
+          if (event.key === "Enter") {
+            const stuffName = event.target.value;
+            const ret = await addNewStuff(stuffName);
+            let isAddSuccess = false;
+
+            if (ret.result.affectedRows) {
+              if (ret.result.affectedRows === 1) {
+                isAddSuccess = true;
+              }
+              if (ret.result.affectedRows !== 1) {
+                isAddSuccess = false;
+              }
+            }
+
+            if (isAddSuccess === true) {
+
+              await displayStuffNeedToDo();
+              await handleCheckBoxesIsDoneOnclick();
+              input_enter_new_stuff.value="";
+              input_enter_new_stuff.focus();
+            }
+
+            if (isAddSuccess === false) {
+              alert("Add failed!");
+            }
+          }
+        };
+    }
+
     async function main() {
       disableAddButtonWhenFirstTimeRender();
       handleAddNewStuffButtonOnclick();
+      handleInpuEnterNewStuffOnkeydown();
       await displayStuffNeedToDo();
       await handleCheckBoxesIsDoneOnclick();
     }
