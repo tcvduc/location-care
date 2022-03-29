@@ -462,6 +462,8 @@ access our application resouces/api
 
 + Before good bye JS/TS test 1m virtual server request to access api
 and check if the JS/TS can turn from single thread to multiple threads
+  + Currently don't understand single thread, multiple threads 
+
 
 12. DNS Essence 
 - DNS: Domain Name System 
@@ -473,10 +475,31 @@ and check if the JS/TS can turn from single thread to multiple threads
     + 340,282,366,920,938,463,463,374,607,431,768,211,456 <=> 2**128 address
     + 128 bits
 
-V. Inspire quotes
-+ Move the world forward - Mitsubishi
-+ Forward together - Grab 
-+ Go beyond theory - infosec 
+13. MMT Note
+- ISP:
+  + Internet Service Provider    
+  + Company that provide services bellow
+    + Internet connection
+    + Browser 
+    + Email 
+    + Personal web site
+
+- Protocol: Devices communicate each other through Protocol
+- TCP: Transmission Control Protocol
+- IP: Internet Protocol
+- VOIP: Voice Over Internet Protocol
+- OSI: Open Systems Interconnection (7 layers computer systems use to 
+communicate over a network)
+
+- Mạng chuyển mạch gói - Packet switching - sử dụng băng theo nhu cầu, không 
+phung phí, tốc độ thiếu sự ổn định, dễ tắc nghẽn
+- Mạng chuyển mạch mạch - cấp phát băng thông bừa bãi, lãng phí, tốc
+độ ổn định, khó tắc nghẽn  
+- Internet vận hành dựa trên mạng chuyển mạch gói 
+- Gọi qua Mess, Zalo kém ổn định, giá rẻ - do dùng chuyển mạch gói
+- Gọi qua điện thoại ổn định hơn, giá đắt
+
+  
 
 VI. Glean 
 + ISO: International Organization for Standardization
