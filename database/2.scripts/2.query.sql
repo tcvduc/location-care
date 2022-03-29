@@ -3,6 +3,9 @@ use location_care;
 select * 
 from `stuffNeedToDo`;
 
+select * 
+from `shadowStuffNeedToDo`;
+
 -- ----------------------------
 -- 1. Client Authenticate error
 -- ----------------------------
@@ -77,5 +80,10 @@ where variable_name = 'threads_connected';
 show status 
 where variable_name = 'threads_connected';
 
+-- --------------------------------------------
+-- 13. Delete stuff by id
+-- --------------------------------------------
+delete from stuffNeedToDo as s
+where s.id = 1;  
 
 

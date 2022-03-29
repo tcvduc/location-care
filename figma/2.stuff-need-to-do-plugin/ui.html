@@ -44,15 +44,16 @@
     width: 30px;
   }
 
-  #listStuff {
-  }
-
   .add_new_stuff_button_disabled {
     opacity: 0.5;
   }
 
   #add_new_stuff_button:disabled {
     cursor: not-allowed;
+  }
+
+  .removeButton {
+    width: 30px;
   }
 </style>
 
@@ -71,8 +72,27 @@
 
 <script>
   function startScript() {
-    const backendAPIURI = "http://localhost:1212";
+    const backendAPIURI = "http://localhost:2";
     const stuffNeedToDoAPIURI = "/api/stuffNeedToDo";
+
+    /**
+     *
+     * @param {Array} a
+     * @param {any} e
+     * @param {number} pos
+     *
+     */
+    function arrayInsertElementAtPosition(a, e, pos) {
+      /**
+       * -------0 1 2
+       * - a = [1,2,3]
+       * - pos = 1
+       * - e = 5
+       * ---------0 1 2 3
+       * - ret = [1,5,2,3]
+       *
+       */
+    }
 
     /**
      *
@@ -124,10 +144,16 @@
     function createOneStuffNeedToDoElement(text, index, isDoneValue) {
       const stuffHTMLCode = `
   <div class="stuff" >
+    <button>rm </button>
     <span class="stuffName" >${index}. ${text}</span>
     <input  data-id={index} class="isDone" type="checkbox" checked={isDone} />
   </div>
   `;
+
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "X";
+      removeButton.classList.add("removeButton");
+      removeButton.setAttribute("data-stuff-id", index);
 
       const stuff = document.createElement("div");
       stuff.classList.add("stuff");
@@ -142,6 +168,7 @@
       isDone.setAttribute("data-id", index);
 
       stuffName.textContent = index + ". " + text;
+      stuff.appendChild(removeButton);
       stuff.appendChild(stuffName);
       stuff.appendChild(isDone);
 
@@ -220,10 +247,10 @@
 
         const ret = await addNewStuff(stuffName);
 
-        if (ret.result.affectedRows) {
-          if (ret.result.affectedRows === 1) {
-            return await displayStuffNeedToDo();
-          }
+        if (ret.ret.affectedRows === 1) {
+          await displayStuffNeedToDo();
+
+          return;
         }
 
         return alert("Add failed!");
@@ -248,6 +275,8 @@
         );
         listStuff.appendChild(stuff);
       }
+
+      handleRemoveStuffButtonOnclick();
     }
 
     async function handleCheckBoxesIsDoneOnclick() {
@@ -317,20 +346,18 @@
             const ret = await addNewStuff(stuffName);
             let isAddSuccess = false;
 
-            if (ret.result.affectedRows) {
-              if (ret.result.affectedRows === 1) {
-                isAddSuccess = true;
-              }
-              if (ret.result.affectedRows !== 1) {
-                isAddSuccess = false;
-              }
+            if (ret.ret.affectedRows === 1) {
+              isAddSuccess = true;
+            }
+
+            if (ret.ret.affectedRows !== 1) {
+              isAddSuccess = false;
             }
 
             if (isAddSuccess === true) {
-
               await displayStuffNeedToDo();
               await handleCheckBoxesIsDoneOnclick();
-              input_enter_new_stuff.value="";
+              input_enter_new_stuff.value = "";
               input_enter_new_stuff.focus();
             }
 
@@ -341,11 +368,74 @@
         };
     }
 
+    function displayUndoUserInterfaceWhenStuffWasRemovedRecently() {
+      const container = document.getElementById("container");
+      const containerChildElements = container.children;
+      container.children = [
+        new HTMLCollection(),
+        new HTMLCollection(),
+        new HTMLCollection(),
+        new HTMLCollection(),
+      ];
+      console.log(containerChildElements);
+    }
+
+    function handleRemoveStuffButtonOnclick() {
+      const removeButtons = document.querySelectorAll(".removeButton");
+
+      for (let i = removeButtons.length - 1; i >= 0; --i) {
+        removeButtons[i].addEventListener("click", async function (event) {
+          const id = removeButtons[i].getAttribute("data-stuff-id");
+          const ret = await removeStuff(id);
+
+          displayUndoUserInterfaceWhenStuffWasRemovedRecently();
+
+          if (ret.ret.affectedRows === 1) {
+            await displayStuffNeedToDo();
+          }
+        });
+      }
+    }
+
+    /**
+     *
+     * @param {Number|string} id
+     */
+    function removeStuff(id) {
+      const uri = backendAPIURI + stuffNeedToDoAPIURI;
+
+      const fetchOptions = {
+        // mode: "no-cors", // no-cors, *cors, same-origin
+        mode: "cors", // no-cors, *cors, same-origin
+
+        method: "delete", // *GET, POST, PUT, DELETE, etc.
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+        }),
+      };
+
+      return new Promise(function (resolve) {
+        fetch(uri, fetchOptions)
+          .then((ret) => ret.json())
+          .then((ret) => {
+            resolve(ret);
+          });
+      });
+    }
+
     async function main() {
       disableAddButtonWhenFirstTimeRender();
       handleAddNewStuffButtonOnclick();
       handleInpuEnterNewStuffOnkeydown();
       await displayStuffNeedToDo();
+
+      // handleRemoveStuffButtonOnclick();
+
       await handleCheckBoxesIsDoneOnclick();
     }
 

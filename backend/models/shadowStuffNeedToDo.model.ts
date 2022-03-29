@@ -1,7 +1,7 @@
 import db from "../config/database.config";
 import stuffNeedToDo from "../interfaces/stuffNeedToDo.interface";
 
-const tableName = "stuffNeedToDo";
+const tableName = "shadowStuffNeedToDo";
 
 const stuffNeedToDoModel = {
   getAll: async function () {

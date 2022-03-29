@@ -82,11 +82,11 @@ import cors from "cors";
   // backend server
   const http_server: http.Server = http.createServer(app);
 
-  const PORT: any = process.env.PORT ?? 1212;
+  const PORT: any = process.env.PORT ?? 2;
 
   http_server.listen(PORT, function () {
     console.log(
-      `Location Care Backend is listening at PORT = ${PORT}\nURI: http://localhost:1212/`
+      `Location Care Backend is listening at PORT = ${PORT}\nURI: http://localhost:2/`
     );
   });
 })();
