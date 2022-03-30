@@ -55,8 +55,6 @@
   .removeButton {
     width: 30px;
   }
-  .undoButton {
-  }
 </style>
 
 <div id="container">
@@ -72,53 +70,16 @@
   <div id="listStuff"></div>
 </div>
 
+<!-- <script src="https://cdn-server/api/location-care/file1.js"></script> -->
+
+<!-- <script src="http://localhost:3/api/localtion-care/1_figma_test_script_file"></script> -->
+
+<script src="http://localhost:3/api/localtion-care/2_timer_script_js"></script>
+
 <script>
   function startScript() {
     const backendAPIURI = "http://localhost:2";
     const stuffNeedToDoAPIURI = "/api/stuffNeedToDo";
-
-    /**
-     *
-     * @param {HTMLElement} timer
-     */
-    function timer(timer) {
-      let displayTime = 5000;
-      timer.innerHTML = displayTime / 1000;
-
-      function decreasingTime() {
-        let oneSecond = 1000;
-
-        setInterval(() => {
-          if (displayTime === 0) {
-            return;
-          }
-
-          displayTime -= oneSecond;
-          timer.innerHTML = displayTime / 1000;
-        }, oneSecond);
-      }
-
-      decreasingTime();
-    }
-
-    /**
-     *
-     * @param {Array} a
-     * @param {any} e
-     * @param {number} pos
-     *
-     */
-    function arrayInsertElementAtPosition(a, e, pos) {
-      /**
-       * -------0 1 2
-       * - a = [1,2,3]
-       * - pos = 1
-       * - e = 5
-       * ---------0 1 2 3
-       * - ret = [1,5,2,3]
-       *
-       */
-    }
 
     /**
      *
@@ -394,7 +355,22 @@
         };
     }
 
-    function displayUndoUserInterfaceWhenStuffWasRemovedRecently() {
+    /**
+     *
+     * @param {number|string} id
+     */
+    function getBackRecentRemovedStuff(id) {
+      const uri = backendAPIURI + stuffNeedToDoAPIURI;
+      const fetchOptions = {};
+      fetch();
+      return new Promise(function (resolve) {});
+    }
+
+    /**
+     *
+     * @param {number|string} id // stuff id
+     */
+    function displayUndoUserInterfaceWhenStuffWasRemovedRecently(id) {
       const add_form = document.getElementById("add_form");
       const undoButton = document.createElement("button");
       const timerElement = document.createElement("div");
@@ -408,6 +384,15 @@
 
       add_form.insertAdjacentElement("afterend", undoButton);
       add_form.insertAdjacentElement("afterend", timerElement);
+
+      undoButton.onclick =
+        /**
+         *
+         * @param {Event} event
+         */
+        function (event) {
+          fetch();
+        };
 
       setTimeout(() => {
         undoButton.remove();
@@ -423,7 +408,7 @@
           const id = removeButtons[i].getAttribute("data-stuff-id");
           const ret = await removeStuff(id);
 
-          displayUndoUserInterfaceWhenStuffWasRemovedRecently();
+          displayUndoUserInterfaceWhenStuffWasRemovedRecently(id);
 
           if (ret.ret.affectedRows === 1) {
             await displayStuffNeedToDo();
@@ -472,6 +457,16 @@
       // handleRemoveStuffButtonOnclick();
 
       await handleCheckBoxesIsDoneOnclick();
+    }
+
+    function updateCdnScriptAfter2Hours() {
+      const time = 7200000;
+      const scriptCode=`
+<script src="http://localhost:3/api/localtion-care/2_timer_script_js">
+  </script>`;
+      setInterval(() => {}, time);
+      const container = document.getElementById("container");
+
     }
 
     {

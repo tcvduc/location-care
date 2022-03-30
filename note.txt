@@ -524,6 +524,11 @@ access our application resouces/api
 6697,   // IRC + TLS
 10080,  // Amanda
 
+9.8. CDN
+- CDN: Content Delivery Network
+
+
+
 10. Web Browser Essence
 10.1. Summary 
 - A Software 

@@ -1,8 +1,8 @@
-drop database if exists location_care;
+drop database if exists stephen;
 
-create database location_care;
+create database stephen;
 
-use location_care;
+use stephen;
 
 -- --------------------------------
 -- Table For `stuff_need_to_do`
@@ -18,6 +18,11 @@ create table `stuffNeedToDo`(
 -- --------------------------------
 -- Records For `stuff_need_to_do`
 -- --------------------------------
+insert into `stuffNeedToDo` (stuffName, isDone) values ("Auto update ngrok uri new session",false);
+insert into `stuffNeedToDo` (stuffName, isDone) values ("Auto start ngrok when it expires",false);
+insert into `stuffNeedToDo` (stuffName, isDone) values ("Onboard ngrok/web-expose",false);
+insert into `stuffNeedToDo` (stuffName, isDone) values ("ENV for figma plugin HTML Problem",false);
+insert into `stuffNeedToDo` (stuffName, isDone) values ("CDN Script Files Problem",false);
 insert into `stuffNeedToDo` (stuffName, isDone) values ("Revise MMT knowledge",false);
 insert into `stuffNeedToDo` (stuffName, isDone) values ("Acknowledge the truth when the application was deploy to CH Play",false);
 insert into `stuffNeedToDo` (stuffName, isDone) values ("Learn To Work With MySQL Shell",false);
@@ -67,6 +72,22 @@ create table `origins`(
 insert into `origins` (origin) values ("http://example1.com");
 insert into `origins` (origin) values ("http://example2.com");
 
+
+
+-- --------------------------------
+-- Table For `cdnServer`
+-- --------------------------------
+
+create table `cdnServer`(
+	id int auto_increment,
+    uri varchar(200),
+    primary key (id)
+);
+
+-- --------------------------------
+-- Record For `cdnServer`
+-- --------------------------------
+insert into `cdnServer` (uri) values ("http://cdn-server.com");
 
 
 

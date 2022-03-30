@@ -6,7 +6,7 @@ let pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "1",
-  database: "location_care",
+  database: "stephen",
   insecureAuth: true,
 });
 

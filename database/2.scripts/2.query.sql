@@ -1,4 +1,4 @@
-use location_care;
+use stephen;
 
 select * 
 from `stuffNeedToDo`;
@@ -85,5 +85,34 @@ where variable_name = 'threads_connected';
 -- --------------------------------------------
 delete from stuffNeedToDo as s
 where s.id = 1;  
+
+-- --------------------------------------------
+-- 14. get all cdn uri 
+-- --------------------------------------------
+select *
+from `cdnServer`;
+
+-- --------------------------------------------
+-- 15. add new cdn uri 
+-- --------------------------------------------
+insert into `cdnServer` (uri) values ('');
+
+-- --------------------------------------------
+-- 16. update cdn uri 
+-- --------------------------------------------
+update cdnServer
+set uri = 'asdasd'
+where id = 1;
+
+-- --------------------------------------------
+-- 17. get current activate cdn uri 
+-- --------------------------------------------
+select uri 
+from cdnServer 
+order by id asc 
+limit 1;
+
+
+
 
 
