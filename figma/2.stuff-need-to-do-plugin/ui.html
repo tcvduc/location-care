@@ -55,6 +55,8 @@
   .removeButton {
     width: 30px;
   }
+  .undoButton {
+  }
 </style>
 
 <div id="container">
@@ -74,6 +76,30 @@
   function startScript() {
     const backendAPIURI = "http://localhost:2";
     const stuffNeedToDoAPIURI = "/api/stuffNeedToDo";
+
+    /**
+     *
+     * @param {HTMLElement} timer
+     */
+    function timer(timer) {
+      let displayTime = 5000;
+      timer.innerHTML = displayTime / 1000;
+
+      function decreasingTime() {
+        let oneSecond = 1000;
+
+        setInterval(() => {
+          if (displayTime === 0) {
+            return;
+          }
+
+          displayTime -= oneSecond;
+          timer.innerHTML = displayTime / 1000;
+        }, oneSecond);
+      }
+
+      decreasingTime();
+    }
 
     /**
      *
@@ -369,15 +395,24 @@
     }
 
     function displayUndoUserInterfaceWhenStuffWasRemovedRecently() {
-      const container = document.getElementById("container");
-      const containerChildElements = container.children;
-      container.children = [
-        new HTMLCollection(),
-        new HTMLCollection(),
-        new HTMLCollection(),
-        new HTMLCollection(),
-      ];
-      console.log(containerChildElements);
+      const add_form = document.getElementById("add_form");
+      const undoButton = document.createElement("button");
+      const timerElement = document.createElement("div");
+      const displayTime = 5000;
+
+      undoButton.classList.add("undoButton");
+
+      undoButton.textContent = `undo`;
+
+      timer(timerElement);
+
+      add_form.insertAdjacentElement("afterend", undoButton);
+      add_form.insertAdjacentElement("afterend", timerElement);
+
+      setTimeout(() => {
+        undoButton.remove();
+        timerElement.remove();
+      }, displayTime);
     }
 
     function handleRemoveStuffButtonOnclick() {
