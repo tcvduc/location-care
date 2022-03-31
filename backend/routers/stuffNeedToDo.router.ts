@@ -118,30 +118,25 @@ router.delete("/", async function (req: Request, res: Response) {
   });
 });
 
-router.get("/undo", async function (req: Request, res: Response) {
-  const stuffWhichWasDeletedRecently =
-    await shadowStuffNeedToDoModel.getLastRecord();
-  const stuffNeedToDoLastRecord = await stuffNeedToDoModel.getLastRecord();
-
-  if (
-    stuffWhichWasDeletedRecently instanceof Array &&
-    stuffNeedToDoLastRecord instanceof Array
-  ) {
-    const stuff: stuffNeedToDo = {
-      id: stuffNeedToDoLastRecord[0].id + 1,
-      isDone: stuffWhichWasDeletedRecently[0].isDone,
-      stuffName: stuffWhichWasDeletedRecently[0].stuffName,
-    };
-
-    const reInsertTableRet = await stuffNeedToDoModel.add(stuff);
-
+router.post("/undo", async function (req: Request, res: Response) {
+  if (req.body.id === undefined || req.body.stuffName === undefined) {
     return res.json({
-      ret: reInsertTableRet,
+      message: "Body error!",
     });
   }
 
-  return res.status(500).json({
-    errorMessage: "Something broke!",
+  const { id, stuffName } = req.body;
+
+  const stuff: stuffNeedToDo = {
+    id: id,
+    stuffName: stuffName,
+    isDone: false,
+  };
+
+  const ret = await stuffNeedToDoModel.add(stuff);
+
+  return res.json({
+    ret,
   });
 });
 

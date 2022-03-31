@@ -138,6 +138,7 @@
       removeButton.textContent = "X";
       removeButton.classList.add("removeButton");
       removeButton.setAttribute("data-stuff-id", index);
+      removeButton.setAttribute("data-stuff-name", text);
 
       const stuff = document.createElement("div");
       stuff.classList.add("stuff");
@@ -365,20 +366,27 @@
 
     /**
      *
-     * @param {number|string} id // stuff id
+     * @param {string|number} id // stuff id
+     * @param {string} stuffName // stuffName
      */
-    function displayUndoUserInterfaceWhenStuffWasRemovedRecently(id) {
+    function displayUndoUserInterfaceWhenStuffWasRemovedRecently(
+      id,
+      stuffName
+    ) {
       const add_form = document.getElementById("add_form");
       const undoButton = document.createElement("button");
+      undoButton.setAttribute("data-id", id);
+      undoButton.setAttribute("data-stuff-name", stuffName);
+
       const timerElement = document.createElement("div");
       timerElement.classList.add("timer");
-      const displayTime = 5000;
+      const displayTime = 15000;
 
       undoButton.classList.add("undoButton");
 
       undoButton.textContent = `undo`;
 
-      timer(timerElement);
+      timer(timerElement, displayTime);
 
       add_form.insertAdjacentElement("afterend", undoButton);
       add_form.insertAdjacentElement("afterend", timerElement);
@@ -390,23 +398,22 @@
          */
         function (event) {
           const uri = backendApiUri + stuffNeedToDoApiUri + "/undo";
-          const fetchOptions = {};
 
           fetch(uri, {
             mode: "cors", // no-cors, *cors, same-origin
 
-            method: "get", // *GET, POST, PUT, DELETE, etc.
+            method: "post", // *GET, POST, PUT, DELETE, etc.
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
             // credentials: "same-origin", // include, *same-origin, omit
             headers: {
               "Content-Type": "application/json",
             },
+            body: JSON.stringify({ id: id, stuffName: stuffName }),
           })
             .then((ret) => ret.json())
             .then(async (ret) => {
               if (ret.ret.affectedRows !== undefined) {
                 undoButton.remove();
-
                 await displayStuffNeedToDo();
               }
             });
@@ -424,9 +431,10 @@
       for (let i = removeButtons.length - 1; i >= 0; --i) {
         removeButtons[i].addEventListener("click", async function (event) {
           const id = removeButtons[i].getAttribute("data-stuff-id");
+          const stuffName = removeButtons[i].getAttribute("data-stuff-name");
           const ret = await removeStuff(id);
 
-          displayUndoUserInterfaceWhenStuffWasRemovedRecently(id);
+          displayUndoUserInterfaceWhenStuffWasRemovedRecently(id, stuffName);
 
           if (ret.ret.affectedRows === 1) {
             await displayStuffNeedToDo();
