@@ -4,7 +4,7 @@ import stuffNeedToDoModel from "../models/stuffNeedToDo.model";
 import stuffNeedToDo from "../interfaces/stuffNeedToDo.interface";
 import { generateRandomString } from "../utils/1.string.util";
 import { generateRandomNumber } from "../utils/2.number.util";
-import shadowStuffNeedToDo from "../models/shadowStuffNeedToDo.model";
+import shadowStuffNeedToDoModel from "../models/shadowStuffNeedToDo.model";
 const router = express.Router();
 
 router.get("/", async function (req: Request, res: Response) {
@@ -25,7 +25,8 @@ router.post("/", async function (req: Request, res: Response) {
   const { stuffName } = req.body;
 
   const lastRecord: unknown = await stuffNeedToDoModel.getLastRecord();
-  const shadowLastRecords: unknown = await shadowStuffNeedToDo.getLastRecord();
+  const shadowLastRecords: unknown =
+    await shadowStuffNeedToDoModel.getLastRecord();
 
   if (lastRecord instanceof Array && shadowLastRecords instanceof Array) {
     const stuff: stuffNeedToDo = {
@@ -41,7 +42,7 @@ router.post("/", async function (req: Request, res: Response) {
     };
 
     const ret = await stuffNeedToDoModel.add(stuff);
-    const shadowRet = await shadowStuffNeedToDo.add(shadowStuff);
+    const shadowRet = await shadowStuffNeedToDoModel.add(shadowStuff);
 
     return res.json({
       ret: ret,
@@ -114,6 +115,33 @@ router.delete("/", async function (req: Request, res: Response) {
 
   return res.json({
     ret,
+  });
+});
+
+router.get("/undo", async function (req: Request, res: Response) {
+  const stuffWhichWasDeletedRecently =
+    await shadowStuffNeedToDoModel.getLastRecord();
+  const stuffNeedToDoLastRecord = await stuffNeedToDoModel.getLastRecord();
+
+  if (
+    stuffWhichWasDeletedRecently instanceof Array &&
+    stuffNeedToDoLastRecord instanceof Array
+  ) {
+    const stuff: stuffNeedToDo = {
+      id: stuffNeedToDoLastRecord[0].id + 1,
+      isDone: stuffWhichWasDeletedRecently[0].isDone,
+      stuffName: stuffWhichWasDeletedRecently[0].stuffName,
+    };
+
+    const reInsertTableRet = await stuffNeedToDoModel.add(stuff);
+
+    return res.json({
+      ret: reInsertTableRet,
+    });
+  }
+
+  return res.status(500).json({
+    errorMessage: "Something broke!",
   });
 });
 

@@ -112,6 +112,20 @@ from cdnServer
 order by id asc 
 limit 1;
 
+-- --------------------------------------------
+-- 18. get all shadow stuff need to do
+-- --------------------------------------------
+select * 
+from `shadowStuffNeedToDo`;
+
+-- --------------------------------------------------------------------------
+-- 19. get recent stuff need to do which was deleted - undo feature
+-- --------------------------------------------------------------------------
+select * 
+from `shadowStuffNeedToDo` 
+order by id desc 
+limit 1;
+
 
 
 

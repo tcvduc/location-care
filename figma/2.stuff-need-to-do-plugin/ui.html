@@ -371,6 +371,7 @@
       const add_form = document.getElementById("add_form");
       const undoButton = document.createElement("button");
       const timerElement = document.createElement("div");
+      timerElement.classList.add("timer");
       const displayTime = 5000;
 
       undoButton.classList.add("undoButton");
@@ -388,7 +389,27 @@
          * @param {Event} event
          */
         function (event) {
-          fetch();
+          const uri = backendApiUri + stuffNeedToDoApiUri + "/undo";
+          const fetchOptions = {};
+
+          fetch(uri, {
+            mode: "cors", // no-cors, *cors, same-origin
+
+            method: "get", // *GET, POST, PUT, DELETE, etc.
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            // credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((ret) => ret.json())
+            .then(async (ret) => {
+              if (ret.ret.affectedRows !== undefined) {
+                undoButton.remove();
+
+                await displayStuffNeedToDo();
+              }
+            });
         };
 
       setTimeout(() => {
