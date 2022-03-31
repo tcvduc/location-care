@@ -70,16 +70,41 @@
   <div id="listStuff"></div>
 </div>
 
+<div id="insertScriptAfterThisElement"></div>
+
 <!-- <script src="https://cdn-server/api/location-care/file1.js"></script> -->
 
-<!-- <script src="http://localhost:3/api/localtion-care/1_figma_test_script_file"></script> -->
-
-<script src="http://localhost:3/api/localtion-care/2_timer_script_js"></script>
+<!-- <script src="http://localhost:3/api/localtion-care/2_timer_script_js"></script> -->
 
 <script>
   function startScript() {
-    const backendAPIURI = "http://localhost:2";
-    const stuffNeedToDoAPIURI = "/api/stuffNeedToDo";
+    const backendApiUri = "http://localhost:2";
+    const stuffNeedToDoApiUri = "/api/stuffNeedToDo";
+    const cdnServerApiUri = "/api/cdnServerRouter";
+
+    /**
+     *
+     * @param {HTMLElement} timer
+     */
+    function timer(timer) {
+      let displayTime = 5000;
+      timer.innerHTML = displayTime / 1000;
+
+      function decreasingTime() {
+        let oneSecond = 1000;
+
+        setInterval(() => {
+          if (displayTime === 0) {
+            return;
+          }
+
+          displayTime -= oneSecond;
+          timer.innerHTML = displayTime / 1000;
+        }, oneSecond);
+      }
+
+      decreasingTime();
+    }
 
     /**
      *
@@ -163,7 +188,7 @@
     }
 
     async function getDataStuffNeedToDo() {
-      const request_URI = backendAPIURI + stuffNeedToDoAPIURI;
+      const request_URI = backendApiUri + stuffNeedToDoApiUri;
       const fetchOptions = {
         // mode: "no-cors", // no-cors, *cors, same-origin
         mode: "cors", // no-cors, *cors, same-origin
@@ -208,7 +233,7 @@
       };
 
       return new Promise(function (resolve) {
-        const ret = fetch(backendAPIURI + stuffNeedToDoAPIURI, fetchOptions)
+        const ret = fetch(backendApiUri + stuffNeedToDoApiUri, fetchOptions)
           .then((ret) => ret.json())
           .then((ret) => {
             resolve(ret);
@@ -286,7 +311,7 @@
      *
      */
     async function editIsDoneStuff(id, isDone) {
-      const uri = backendAPIURI + stuffNeedToDoAPIURI;
+      const uri = backendApiUri + stuffNeedToDoApiUri;
       const data = {
         id: id,
         isDone: isDone,
@@ -360,7 +385,7 @@
      * @param {number|string} id
      */
     function getBackRecentRemovedStuff(id) {
-      const uri = backendAPIURI + stuffNeedToDoAPIURI;
+      const uri = backendApiUri + stuffNeedToDoApiUri;
       const fetchOptions = {};
       fetch();
       return new Promise(function (resolve) {});
@@ -422,7 +447,7 @@
      * @param {Number|string} id
      */
     function removeStuff(id) {
-      const uri = backendAPIURI + stuffNeedToDoAPIURI;
+      const uri = backendApiUri + stuffNeedToDoApiUri;
 
       const fetchOptions = {
         // mode: "no-cors", // no-cors, *cors, same-origin
@@ -459,18 +484,47 @@
       await handleCheckBoxesIsDoneOnclick();
     }
 
-    function updateCdnScriptAfter2Hours() {
-      const time = 7200000;
-      const scriptCode=`
-<script src="http://localhost:3/api/localtion-care/2_timer_script_js">
-  </script>`;
-      setInterval(() => {}, time);
-      const container = document.getElementById("container");
+    function getCdnServerUri() {
+      const uri = backendApiUri + cdnServerApiUri;
+      const fetchOptions = {
+        mode: "cors", // no-cors, *cors, same-origin
+        method: "get", // *GET, POST, PUT, DELETE, etc.
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      };
 
+      return new Promise(function (resolve) {
+        fetch(uri, fetchOptions)
+          .then((ret) => ret.json())
+          .then((ret) => {
+            resolve(ret);
+          });
+      });
     }
 
+    async function updateCdnScriptAfter2Hours() {
+      const time = 7100000;
+
+      const src = await getCdnServerUri();
+      const script1 = document.createElement("script");
+      script1.src = src.ret.uri;
+
+      const insertScriptAfterThisElement = document.getElementById(
+        "insertScriptAfterThisElement"
+      );
+
+      insertScriptAfterThisElement.insertAdjacentElement("afterend", script1);
+
+      setInterval(async () => {
+        const src = await getCdnServerUri();
+        const scriptTag = document.createElement("script");
+        scriptTag.src = src;
+      }, time);
+
+      const container = document.getElementById("container");
+    }
     {
       main();
+      updateCdnScriptAfter2Hours();
     }
   }
 

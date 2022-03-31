@@ -1,12 +1,12 @@
 import express, { Express, Request, Response, NextFunction } from "express";
-import stuffNeedToDoRouter from "./routers/stuffNeedToDo.route";
-import originsRouter from "./routers/origins.route";
-import slashRouter from "./routers/slash.route";
+import stuffNeedToDoRouter from "./routers/stuffNeedToDo.router";
+import originsRouter from "./routers/origins.router";
+import slashRouter from "./routers/slash.router";
 import http from "http";
 import db from "./config/database.config";
 import originsModel from "./models/origins.model";
 import cors from "cors";
-
+import cdnServerRouter from "./routers/cdnServer.router";
 (() => {
   let allowOriginList = ["http://example1.com"];
 
@@ -69,13 +69,14 @@ import cors from "cors";
   app.use("/", slashRouter);
   app.use("/api/stuffNeedToDo", stuffNeedToDoRouter);
   app.use("/api/origins", originsRouter);
+  app.use("/api/cdnServerRouter", cdnServerRouter);
 
   // Error handling
 
   app.use(function (req: Request, res: Response, next: NextFunction) {
     const error = new Error("Not found!");
-    return res.status(404).json({
-      message: error.message,
+    return res.json({
+      errorMessage: error.message,
     });
   });
 
