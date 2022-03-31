@@ -3,16 +3,22 @@ import cdnServerModel from "../models/cdnServer.model";
 const router = express.Router();
 
 router.get("/", async function (req: Request, res: Response) {
-  const uri = await cdnServerModel.getExposeUri();
+  const allRoutes = await cdnServerModel.getAllApiRouteServices();
+  const defaultApiUriForStephen = "/api/stephen";
+  const currentActivateUri = await cdnServerModel.getCurrentActiveURI();
+  const uris = [];
 
-  if (uri instanceof Array) {
-    return res.json({
-      ret: uri[0],
-    });
+  if (allRoutes instanceof Array) {
+    let currentFullUri = "";
+    for (let i = allRoutes.length - 1; i >= 0; --i) {
+      currentFullUri =
+        currentActivateUri + defaultApiUriForStephen + allRoutes[i].route;
+      uris.push(currentFullUri);
+    }
   }
 
   return res.json({
-    ret: uri,
+    uris: uris,
   });
 });
 

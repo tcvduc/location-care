@@ -539,7 +539,8 @@ access our application resouces/api
 - Web ?
   + 
 
-11. 1m user do write/read records at the same time problem
+11. Database Note
+11.1. 1m user do write/read records at the same time problem
 + Understand single thread
   + Do one stuff at a time.
   + What is the truth when 1m user do read/write records in the app? 
@@ -549,6 +550,56 @@ access our application resouces/api
 + Before good bye JS/TS test 1m virtual server request to access api
 and check if the JS/TS can turn from single thread to multiple threads
   + Currently don't understand single thread, multiple threads 
+
+
+11.2. origins need multiple script cnd 
+- Understand the problem: 
+  + origin 1: https://stephen.com 
+  + backend server: https://stephen-backend.com
+  + cdn server services: https://cdn-server.com
+    + service to origin 1: /api/stephen
+      + service 1: /file1.txt
+      + service 2: /file2.txt
+      + service 3: /file3.txt
+    -> Full uri 1: https://cdn-server.com/api/stephen/file1.txt
+    -> Full uri 2: https://cdn-server.com/api/stephen/file2.txt
+    -> Full uri 3: https://cdn-server.com/api/stephen/file3.txt
+
+  + origin 2: https://www.w3.com 
+  + cdn server services: https://cdn-server.com
+    + service to origin 2: /api/w3
+      + service 1: /file1.txt
+      + service 2: /file2.txt
+      + service 3: /file3.txt
+    -> Full uri 1: https://cdn-server.com/api/w3/file1.txt
+    -> Full uri 2: https://cdn-server.com/api/w3/file2.txt
+    -> Full uri 3: https://cdn-server.com/api/w3/file3.txt
+
+  + Currently cdn server uri update 1 time per ~2 hour
+    + random full uri : https://cdn-server-1.com/api/w3/file1.txt
+    + random full uri : https://cdn-server-2.com/api/w3/file1.txt
+    + random full uri : https://cdn-server-3.com/api/w3/file1.txt
+
+  -> How to access cdn server when it uri is change usually?
+     + Temporary solution: touch it database
+      
+
+  + step 1: Write backend api to send a array of full cdn uri 
+  for stephen app
+    + step 1.1: design database schema to save route services
+    coresponding origins 
+    + step 1.2: implement on backend code
+  + step 2: on figma plugin developing, map it into script tags 
+  + step 3: append those script into plugin
+
+
+
+
+
+
+
+
+
 
 
 12. DNS Essence 

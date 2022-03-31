@@ -72,39 +72,11 @@
 
 <div id="insertScriptAfterThisElement"></div>
 
-<!-- <script src="https://cdn-server/api/location-care/file1.js"></script> -->
-
-<!-- <script src="http://localhost:3/api/localtion-care/2_timer_script_js"></script> -->
-
 <script>
   function startScript() {
     const backendApiUri = "http://localhost:2";
     const stuffNeedToDoApiUri = "/api/stuffNeedToDo";
     const cdnServerApiUri = "/api/cdnServerRouter";
-
-    /**
-     *
-     * @param {HTMLElement} timer
-     */
-    function timer(timer) {
-      let displayTime = 5000;
-      timer.innerHTML = displayTime / 1000;
-
-      function decreasingTime() {
-        let oneSecond = 1000;
-
-        setInterval(() => {
-          if (displayTime === 0) {
-            return;
-          }
-
-          displayTime -= oneSecond;
-          timer.innerHTML = displayTime / 1000;
-        }, oneSecond);
-      }
-
-      decreasingTime();
-    }
 
     /**
      *
@@ -504,15 +476,26 @@
     async function updateCdnScriptAfter2Hours() {
       const time = 7100000;
 
-      const src = await getCdnServerUri();
-      const script1 = document.createElement("script");
-      script1.src = src.ret.uri;
+      const srcs = await getCdnServerUri();
 
-      const insertScriptAfterThisElement = document.getElementById(
-        "insertScriptAfterThisElement"
-      );
+      if (srcs.uris !== undefined) {
+        const { uris } = srcs;
+        if (uris instanceof Array) {
+          for (let i = uris.length - 1; i >= 0; --i) {
+            const script = document.createElement("script");
+            script.src = uris[i];
 
-      insertScriptAfterThisElement.insertAdjacentElement("afterend", script1);
+            const insertScriptAfterThisElement = document.getElementById(
+              "insertScriptAfterThisElement"
+            );
+
+            insertScriptAfterThisElement.insertAdjacentElement(
+              "afterend",
+              script
+            );
+          }
+        }
+      }
 
       setInterval(async () => {
         const src = await getCdnServerUri();

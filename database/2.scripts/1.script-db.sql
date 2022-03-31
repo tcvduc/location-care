@@ -48,6 +48,7 @@ create table `shadowStuffNeedToDo`(
 -- --------------------------------
 -- Records For `shadowStuffNeedToDo`
 -- --------------------------------
+insert into `shadowStuffNeedToDo` (stuffName, isDone) values ("Onboard send multiple files nodejs one api",false);
 insert into `shadowStuffNeedToDo` (stuffName, isDone) values ("Revise MMT knowledge",false);
 insert into `shadowStuffNeedToDo` (stuffName, isDone) values ("Acknowledge the truth when the application was deploy to CH Play",false);
 insert into `shadowStuffNeedToDo` (stuffName, isDone) values ("Learn To Work With MySQL Shell",false);
