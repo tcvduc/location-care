@@ -127,7 +127,7 @@
      */
     function createOneStuffNeedToDoElement(text, index, isDoneValue) {
       const stuffHTMLCode = `
-  <div class="stuff" >
+  <div class="stuff" data-id = '1'  >
     <button>rm </button>
     <span class="stuffName" >${index}. ${text}</span>
     <input  data-id={index} class="isDone" type="checkbox" checked={isDone} />
@@ -142,6 +142,8 @@
 
       const stuff = document.createElement("div");
       stuff.classList.add("stuff");
+      stuff.setAttribute("data-id", index);
+      stuff.setAttribute("data-stuff-name", text);
 
       const stuffName = document.createElement("div");
       stuffName.classList.add("stuffName");
@@ -368,19 +370,22 @@
      *
      * @param {string|number} id // stuff id
      * @param {string} stuffName // stuffName
+     * @param {HTMLElement} parentElement // parentElement
+     *
+     *
      */
     function displayUndoUserInterfaceWhenStuffWasRemovedRecently(
       id,
-      stuffName
+      stuffName,
+      parentElement
     ) {
-      const add_form = document.getElementById("add_form");
       const undoButton = document.createElement("button");
       undoButton.setAttribute("data-id", id);
       undoButton.setAttribute("data-stuff-name", stuffName);
 
       const timerElement = document.createElement("div");
       timerElement.classList.add("timer");
-      const displayTime = 15000;
+      const displayTime = 4000;
 
       undoButton.classList.add("undoButton");
 
@@ -388,8 +393,10 @@
 
       timer(timerElement, displayTime);
 
-      add_form.insertAdjacentElement("afterend", undoButton);
-      add_form.insertAdjacentElement("afterend", timerElement);
+      parentElement.innerHTML = "";
+      parentElement.appendChild(undoButton);
+      parentElement.appendChild(timerElement);
+      let isUndoButtonClicked = false;
 
       undoButton.onclick =
         /**
@@ -397,6 +404,7 @@
          * @param {Event} event
          */
         function (event) {
+          isUndoButtonClicked = true;
           const uri = backendApiUri + stuffNeedToDoApiUri + "/undo";
 
           fetch(uri, {
@@ -413,16 +421,26 @@
             .then((ret) => ret.json())
             .then(async (ret) => {
               if (ret.ret.affectedRows !== undefined) {
-                undoButton.remove();
-                await displayStuffNeedToDo();
+                const stuff = createOneStuffNeedToDoElement(
+                  stuffName,
+                  id,
+                  false
+                );
+
+                parentElement.innerHTML = "";
+
+                parentElement.replaceWith(stuff);
+                handleRemoveStuffButtonOnclick();
+                handleCheckBoxesIsDoneOnclick();
               }
             });
         };
 
-      setTimeout(() => {
-        undoButton.remove();
-        timerElement.remove();
-      }, displayTime);
+      if (isUndoButtonClicked === false) {
+        setTimeout(() => {
+          parentElement.remove();
+        }, displayTime);
+      }
     }
 
     function handleRemoveStuffButtonOnclick() {
@@ -430,15 +448,21 @@
 
       for (let i = removeButtons.length - 1; i >= 0; --i) {
         removeButtons[i].addEventListener("click", async function (event) {
-          const id = removeButtons[i].getAttribute("data-stuff-id");
-          const stuffName = removeButtons[i].getAttribute("data-stuff-name");
+          const parentElement = removeButtons[i].parentElement;
+          const id = parentElement.getAttribute("data-id");
+          const stuffName = parentElement.getAttribute("data-stuff-name");
           const ret = await removeStuff(id);
+          parentElement.innerHTML = "parentElement";
 
-          displayUndoUserInterfaceWhenStuffWasRemovedRecently(id, stuffName);
+          displayUndoUserInterfaceWhenStuffWasRemovedRecently(
+            id,
+            stuffName,
+            parentElement
+          );
 
-          if (ret.ret.affectedRows === 1) {
-            await displayStuffNeedToDo();
-          }
+          // if (ret.ret.affectedRows === 1) {
+          //   await displayStuffNeedToDo();
+          // }
         });
       }
     }
