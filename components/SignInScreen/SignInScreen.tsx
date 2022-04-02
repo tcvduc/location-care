@@ -1,52 +1,95 @@
-import { StyleSheet, Text, View, Image, TextInput } from "react-native";
-import dayIcon from "../../assets/images/logo-ver3.png";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  NativeTouchEvent,
+  NativeSyntheticEvent,
+} from "react-native";
 import { appColors } from "../../config/global.variables";
 import PhoneInput from "react-native-phone-input";
+import { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 
 // const commonBorderRadiusValue = 5;
 // const commonButtonPaddingValue = 12;
 
+const inputFieldHeight = 40;
+const inputFieldWidth = "80%";
+
 export default function Home() {
+  const [] = useState();
+
+  const handleButtonSignInOnpress =
+    function () // event: NativeSyntheticEvent<NativeTouchEvent>
+    {
+      alert("touched");
+    };
+
+  const handleButtonSignUpOnpress = function () {
+    alert("touched");
+  };
   return (
-    <View style={styles.membrane}>
-      <View style={styles.dayIconContainer}>
-        <Image style={styles.dayIcon} source={dayIcon} />
+    <LinearGradient
+      style={styles.linearGradient}
+      colors={["#243170", "rgba(44, 60, 137, 0.3)"]}
+    >
+      <View style={styles.section}>
+        <Text style={styles.appName}>Stephen</Text>
       </View>
       <View style={styles.section}>
-        <Text style={styles.appName}>Location Care</Text>
+        <PhoneInput
+          style={styles.phoneInput}
+          textProps={{ placeholder: "Phone number" }}
+        />
       </View>
       <View style={styles.section}>
-        <PhoneInput style={styles.phoneInput} />
+        <TextInput
+          style={styles.passwordField}
+          placeholder="Password"
+          secureTextEntry={true}
+        />
       </View>
-      <View style={styles.section}>
-        <TextInput style={styles.passwordField} textContentType="password" />
+
+      <View style={styles.groupButton}>
+        <Button onPress={handleButtonSignInOnpress} title="Sign in"></Button>
+        <Button onPress={handleButtonSignInOnpress} title="Sign up"></Button>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  membrane: {
-    backgroundColor: appColors.secondary,
+  linearGradient: {
+    padding: 20,
     height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    // justifyContent: "center",
     paddingTop: "16%",
   },
+  groupButton: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "40%",
+    marginTop: 32,
+  },
+
   passwordField: {
-    width: "70%",
-    height: 30,
-    marginTop: 12,
+    width: inputFieldWidth,
+    height: inputFieldHeight,
+    marginTop: 40,
     borderWidth: 1,
     borderColor: "transparent",
     borderStyle: "solid",
     borderBottomColor: "#111",
   },
   phoneInput: {
-    width: "70%",
-    height: 30,
+    width: inputFieldWidth,
+    height: inputFieldHeight,
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: "transparent",
@@ -79,8 +122,8 @@ const styles = StyleSheet.create({
     color: appColors.primary,
     fontFamily: "sans-serif",
     fontWeight: "600",
-    // marginTop: 12,
-    marginBottom: 28,
+    marginTop: 72,
+    marginBottom: 72,
     fontSize: 32,
   },
   logo: {

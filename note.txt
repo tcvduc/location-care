@@ -366,14 +366,19 @@ for our need
  </warning>
 </message> 
 
-5. Android Studio tools 
+5. android studio tools 
+5.1. doc
 + https://docs.expo.dev/workflow/android-studio-emulator/ 
-+ How to open Appearance & Behavior 
-  + More action -> SDK Manager -> SDK tools
-+ Android SDK Location: C:\Users\LENOVO\AppData\Local\Android\Sdk
-+ ADV: Android Virtual Device
 
-6. Figma tools 
+5.2. How to open Appearance & Behavior 
+  + More action -> SDK Manager -> SDK tools
+  + Android SDK Location: C:\Users\LENOVO\AppData\Local\Android\Sdk
+  + ADV: Android Virtual Device
+
+5.3. How to open a virtual mobile phone to code
+- more action -> virtual device manager -> start button
+
+6. figma note 
 6.1. How to open web console 
   + right click -> development -> open console
 
@@ -382,6 +387,9 @@ for our need
 
 6.3. Quick Open Plugin 
   + ctrl + / -> plugin name
+
+6.4. hidden layers + hidden right bar 
+- ctrl + \| 
 
 
 7. MySQL 
@@ -539,7 +547,7 @@ access our application resouces/api
 - Web ?
   + 
 
-11. Database Note
+11. database note
 11.1. 1m user do write/read records at the same time problem
 + Understand single thread
   + Do one stuff at a time.
@@ -592,10 +600,10 @@ and check if the JS/TS can turn from single thread to multiple threads
   + step 2: on figma plugin developing, map it into script tags 
   + step 3: append those script into plugin
 
+11.3. Auto generate database script when app has new records
+- Understand the problem
 
-
-
-
+- Approach
 
 
 
