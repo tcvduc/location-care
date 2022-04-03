@@ -629,6 +629,7 @@ and check if the JS/TS can turn from single thread to multiple threads
     + Email 
     + Personal web site
 
+
 - Protocol: Devices communicate each other through Protocol
 - TCP: Transmission Control Protocol
 - IP: Internet Protocol
@@ -644,7 +645,24 @@ phung phí, tốc độ thiếu sự ổn định, dễ tắc nghẽn
 - Gọi qua Mess, Zalo kém ổn định, giá rẻ - do dùng chuyển mạch gói
 - Gọi qua điện thoại ổn định hơn, giá đắt
 
+
+14. third party library note
+- web have web libraries
+- mobile have mobile libraries
+
+15. electronic device meet water note
+- Electronic device meet water then it broke.
+- Why?
+  + It isn't water cause, it's the impurities cause the problem.
+  + The chemical reaction from impurities with the device.
+  + Pure water H2O can cause chemical reaction likes: corrosion (Rỉ sét)
   
+16. Current Application Dangerous Problems
+16.1. The laptop which contains server is meet water and impurities
+-> Solution 1: finish college, work, save money, buy multiple laptop/PC,
+then develop later.
+
+
 
 VI. Glean 
 + ISO: International Organization for Standardization

@@ -13,6 +13,9 @@ import { appColors } from "../../config/global.variables";
 import PhoneInput from "react-native-phone-input";
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import CanStylePlaceHolderTextInput from "../CanStylePlaceHolderTextInput/CanStylePlaceHolderTextInput";
+import { TextField } from "@mui/material";
+
 // const commonBorderRadiusValue = 5;
 // const commonButtonPaddingValue = 12;
 
@@ -20,7 +23,11 @@ const inputFieldHeight = 40;
 const inputFieldWidth = "80%";
 
 export default function Home() {
-  const [] = useState();
+  const [password, setPassword] = useState("");
+
+  // const handlePasswordChange = function (event) {
+  //   setPassword();
+  // };
 
   const handleButtonSignInOnpress =
     function () // event: NativeSyntheticEvent<NativeTouchEvent>
@@ -47,6 +54,13 @@ export default function Home() {
           />
         </View>
         <View style={styles.section}>
+          {/* <CanStylePlaceHolderTextInput
+            style={styles.passwordField}
+            onChange={handlePasswordChange}
+            value={password}
+            placeholder="sdasd"
+            placeholderStyle={{ color: "red" }}
+          /> */}
           <TextInput
             style={styles.passwordField}
             placeholder="Password"
@@ -140,8 +154,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "transparent",
     borderStyle: "solid",
-    color: "#111",
-    borderBottomColor: "#111",
+    color: "#fff",
+
+    borderBottomColor: "#fff",
   },
   phoneInput: {
     width: inputFieldWidth,

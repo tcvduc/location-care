@@ -10,6 +10,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
     "@expo-google-fonts/inter": "^0.2.2",
     "@expo/ngrok": "^4.1.0",
     "@react-navigation/native": "^6.0.8",
